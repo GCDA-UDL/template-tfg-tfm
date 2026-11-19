@@ -1,0 +1,85 @@
+% !TEX program = pdflatex
+% =====================================================================
+%  Plantilla de memoria TFG / TFM
+%  Grau en Enginyeria Informàtica · Escola Politècnica Superior · UdL
+%
+%  1. Rellena config/datos.tex (autor, título, director, idioma, citas).
+%  2. Pon la portada oficial de la EPS en portada/portada.pdf.
+%  3. Escribe cada capítulo en capitulos/ y cada apéndice en apendices/.
+%  4. Para depositar: cambia mode=review por mode=final (más abajo)
+%     y comprueba que compila SIN errores ni avisos de referencias.
+%  Lee guia/guia_tfg.pdf antes de empezar.
+% =====================================================================
+\documentclass[12pt,a4paper,oneside,openany]{book}
+
+\input{config/datos}
+\input{config/preambulo}
+\usepackage{pdfpages}
+
+% --- Notas de revisión (revnotes.sty) --------------------------------
+%  mode=review : se ven las notas y los \pending (mientras escribes)
+%  mode=final  : desaparecen las notas; un \pending olvidado da ERROR,
+%                así no se deposita nada con texto provisional.
+\usepackage[mode=review]{revnotes}
+\revauthor{vitor}{Director}{revTeal}      % \vitornote{...} notas del director
+\revauthor{alumno}{Estudiante}{revBlue}   % \alumnonote{...} notas propias
+
+\addbibresource{bibliografia.bib}
+
+\hypersetup{pdftitle={\tfgtitulo},pdfauthor={\tfgautor},
+            pdfsubject={\tfgtipo{} - \tfgtitulacion},pdfkeywords={\tfgclavesES}}
+
+\begin{document}
+
+% =====================================================================
+%  PARTE PRELIMINAR (numeración romana, no aparece en el índice general)
+% =====================================================================
+\frontmatter
+
+% Portada oficial EPS si existe; si no, la provisional.
+\IfFileExists{portada/portada.pdf}
+  {\includepdf[pages=1]{portada/portada.pdf}}
+  {\input{config/portada_provisional}}
+
+% Un resumen por idioma, cada uno en su propia página.
+\input{preliminares/resumen}      % castellano
+\input{preliminares/resum}        % catalán
+\input{preliminares/abstract}     % inglés
+
+\input{preliminares/agradecimientos}
+\input{preliminares/declaracion_ia}
+
+% Listas de figuras, tablas y acrónimos ANTES del índice general.
+\cleardoublepage\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures
+\cleardoublepage\pdfbookmark[0]{\listtablename}{lot}
+\listoftables
+\cleardoublepage\pdfbookmark[0]{\lstlistlistingname}{lol}
+\lstlistoflistings
+\input{preliminares/acronimos}
+
+\cleardoublepage\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+
+% =====================================================================
+%  CUERPO (numeración arábiga desde 1)
+% =====================================================================
+\mainmatter
+\include{capitulos/01_introduccion}
+\include{capitulos/02_estado_del_arte}
+\include{capitulos/03_metodologia}
+\include{capitulos/04_analisis_diseno}
+\include{capitulos/05_implementacion}
+\include{capitulos/06_pruebas_resultados}
+\include{capitulos/07_conclusiones}
+
+% =====================================================================
+%  BIBLIOGRAFÍA Y APÉNDICES
+% =====================================================================
+\printbibliography[heading=bibintoc]
+
+\appendix
+\include{apendices/a_repositorio_demo}
+\include{apendices/b_manual_instalacion}
+
+\end{document}

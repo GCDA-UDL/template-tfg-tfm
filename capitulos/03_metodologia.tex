@@ -1,0 +1,130 @@
+% =====================================================================
+%  CAPÍTULO 3 · METODOLOGÍA, PLANIFICACIÓN Y VIABILIDAD
+%  Función: explicar CÓMO se ha trabajado y justificarlo.
+%  Reglas clave:
+%   - Justifica la metodología (por qué esta) y que su nombre corresponda al
+%     proceso real («iterativa» solo si de verdad hubo iteraciones).
+%   - Un ÚNICO plan: mismo número de fases y nombres en texto y Gantt.
+%   - El plan llega hasta el depósito y la defensa, y se redacta en PASADO
+%     en la memoria final («se desarrolló», no «se desarrollará»).
+%   - Explica las desviaciones: lo planificado que no se hizo se declara.
+%   - El stack se presenta UNA sola vez (aquí), con versión exacta y cita.
+%   - El Portafoli evalúa la viabilidad económica y legal y la sostenibilidad.
+% =====================================================================
+\chapter{Metodología, planificación y viabilidad}
+\label{cap:metodologia}
+
+Este capítulo describe la metodología seguida, la planificación temporal real
+del proyecto, las herramientas utilizadas y el análisis de su viabilidad.
+
+\section{Metodología de desarrollo}
+\label{sec:metodologia}
+
+Se ha seguido un desarrollo iterativo e incremental en tres incrementos, cada
+uno con análisis, implementación y pruebas propios. Se eligió este enfoque
+porque los requisitos de tiempo real dependían de la validación del primer
+incremento, y una planificación en cascada habría retrasado ese riesgo hasta el
+final del proyecto~\cite{martin2022arquitectura}. Al final de cada incremento se
+revisó el avance con la dirección del trabajo.
+
+\section{Planificación temporal}
+\label{sec:planificacion}
+
+El proyecto se organizó en tres fases, que se muestran en la
+Figura~\ref{fig:cronograma}. La fase de análisis (F1) se desarrolló entre
+octubre y diciembre; la de diseño e implementación (F2), entre diciembre y
+mayo, y la de validación y cierre (F3), entre mayo y julio, hasta el depósito y
+la defensa. Los hitos en rojo corresponden a las entregas que evalúa el
+Portafoli de la \ac{EPS}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figuras/cronograma}
+  \caption{Planificación temporal del proyecto (por quincenas).}
+  \label{fig:cronograma}
+  \fuente{Elaboración propia.}
+\end{figure}
+
+\subsection{Desviaciones respecto al plan inicial}
+\label{sec:desviaciones}
+
+Compara lo planificado con lo realizado. Por ejemplo: el incremento 2 se
+retrasó dos semanas porque la librería de notificaciones elegida no admitía el
+modo sin conexión; se sustituyó por otra y se recortó el incremento 3. Si una
+tarea planificada no se llegó a hacer (por ejemplo, una prueba con usuarios),
+dilo aquí y en el capítulo de pruebas.
+
+\section{Herramientas y tecnologías}
+\label{sec:herramientas}
+
+La Tabla~\ref{tab:herramientas} recoge las herramientas utilizadas, con su
+versión exacta y el motivo de su elección. El resto de la memoria se refiere a
+ellas sin volver a describirlas.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Herramientas y tecnologías utilizadas.}
+  \label{tab:herramientas}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lllL@{}}
+    \toprule
+    \textbf{Capa} & \textbf{Herramienta} & \textbf{Versión} & \textbf{Motivo de la elección} \\
+    \midrule
+    Cliente        & Kotlin~\cite{doc_kotlin}          & 2.0  & Lenguaje recomendado para Android \\
+    Servidor       & Python~\cite{doc_python}          & 3.12 & Experiencia previa y ecosistema de pruebas \\
+    API            & FastAPI~\cite{doc_fastapi}        & 0.115 & Documentación automática de la \ac{API} \\
+    Datos          & PostgreSQL~\cite{doc_postgresql}  & 16   & Transacciones para evitar reservas dobles \\
+    Despliegue     & Docker~\cite{doc_docker}          & 27   & Despliegue reproducible con un solo comando \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+% GUÍA: la versión debe ser la que REALMENTE usaste (mírala en tu proyecto).
+% Justifica por adecuación al problema, no por popularidad
+% («lo usa la empresa X» no es un motivo técnico).
+
+\section{Viabilidad económica}
+\label{sec:viabilidad-economica}
+
+La Tabla~\ref{tab:presupuesto} estima el coste del proyecto. El coste de
+personal se calcula con las horas reales de dedicación (un \ac{TFG} de 15 ECTS
+supone unas 375 horas) y un coste por hora de referencia; el equipo se imputa
+por amortización durante los meses de uso.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Presupuesto estimado del proyecto (datos de ejemplo).}
+  \label{tab:presupuesto}
+  \begin{tabular}{@{}lrrr@{}}
+    \toprule
+    \textbf{Concepto} & \textbf{Cantidad} & \textbf{Coste/ud. (€)} & \textbf{Total (€)} \\
+    \midrule
+    Horas de desarrollo                    & 375 h    & 20          & \num{7500} \\
+    Portátil (amortización 9/48 meses)     & 1        & \num{1200}  & 225 \\
+    Móvil de pruebas (amortización 9/36)   & 1        & 300         & 75 \\
+    Servidor en la nube                    & 6 meses  & 10          & 60 \\
+    Licencias de software                  & ---      & ---         & 0 \\
+    \midrule
+    \textbf{Total}                         &          &             & \textbf{\num{7860}} \\
+    \bottomrule
+  \end{tabular}
+  \fuente{Elaboración propia.}
+\end{table}
+
+\section{Viabilidad legal}
+\label{sec:viabilidad-legal}
+
+Indica qué normativa afecta al proyecto y cómo se cumple. Si se tratan datos
+personales, aplica el \ac{RGPD}~\cite{rgpd2016} y la ley orgánica española de
+protección de datos~\cite{lopdgdd2018}: qué datos se guardan, con qué base
+legal, durante cuánto tiempo y cómo se protegen. Revisa también las licencias de
+las librerías que usas (y la que eliges para tu código) y, en una aplicación,
+las pautas de accesibilidad~\cite{wcag22}.
+
+\section{Sostenibilidad e impacto social}
+\label{sec:sostenibilidad}
+
+Valora brevemente el impacto social, económico y ambiental de la solución: a
+quién beneficia, qué recursos consume (por ejemplo, energía del servidor o
+batería del móvil) y con qué Objetivos de Desarrollo Sostenible se relaciona.

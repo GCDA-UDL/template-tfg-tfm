@@ -1,0 +1,94 @@
+% revnotes.sty -- per-author revision colours, notes and pending items for group papers.
+%
+%   \usepackage{revnotes}                 % mode=review  (default): everything visible
+%   \usepackage[mode=changes]{revnotes}   % additions/deletions coloured, notes hidden
+%   \usepackage[mode=final]{revnotes}     % submission: additions plain, deletions and notes removed
+%
+%   \revauthor{vitor}{Vitor}{revTeal}     % preamble only; defines \vitoradd, \vitordel, \vitornote
+%
+%   \vitoradd{new text}      new or rewritten text (stays in the paper)
+%   \vitordel{old text}      text proposed for removal (struck out; gone in final)
+%   \vitornote{reason}       comment for co-authors (never printed in changes/final)
+%   \pending{what}           open item; an error in changes/final, so it cannot be submitted
+%
+% A build script can force the mode for one compilation without editing the file:
+%   pdflatex "\def\revnotesforcemode{final}\input{main}"
+% The log gets one summary line:  revnotes: mode=review, add=3, del=1, note=2, pending=0
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{revnotes}[2026/11/17 v1.0 per-author revision colours and notes]
+
+\RequirePackage{kvoptions}
+\RequirePackage{etoolbox}
+\SetupKeyvalOptions{family=revnotes,prefix=revnotes@}
+\DeclareStringOption[review]{mode}
+\ProcessKeyvalOptions*
+\ifdefined\revnotesforcemode \edef\revnotes@mode{\revnotesforcemode}\fi
+
+% Options are passed, not imposed: a document that loaded xcolor/ulem earlier keeps its own options.
+\PassOptionsToPackage{dvipsnames}{xcolor}
+\RequirePackage{xcolor}
+\PassOptionsToPackage{normalem}{ulem}
+\RequirePackage{ulem}
+
+\newif\ifrevnotes@marks   % colour additions, strike deletions
+\newif\ifrevnotes@notes   % print notes
+\newif\ifrevnotes@strict  % \pending is an error
+\ifdefstring{\revnotes@mode}{review}{\revnotes@markstrue\revnotes@notestrue\revnotes@strictfalse}{%
+\ifdefstring{\revnotes@mode}{changes}{\revnotes@markstrue\revnotes@notesfalse\revnotes@stricttrue}{%
+\ifdefstring{\revnotes@mode}{final}{\revnotes@marksfalse\revnotes@notesfalse\revnotes@stricttrue}{%
+\PackageError{revnotes}{Unknown mode `\revnotes@mode'}{Use mode=review, mode=changes or mode=final.}}}}
+
+% Palette: legible on white, distinct from each other. Red is reserved for \pending.
+\definecolor{revTeal}{RGB}{0,128,128}
+\definecolor{revCyan}{RGB}{0,139,190}
+\definecolor{revBlue}{RGB}{0,90,200}
+\definecolor{revMahogany}{cmyk}{0,0.85,0.87,0.35}
+\definecolor{revForest}{cmyk}{0.91,0,0.88,0.12}
+\definecolor{revPurple}{RGB}{120,60,170}
+\definecolor{revOrange}{RGB}{205,100,0}
+\definecolor{revMagenta}{RGB}{200,0,140}
+\definecolor{revPending}{RGB}{220,0,0}
+
+\newcounter{revnotes@add}
+\newcounter{revnotes@del}
+\newcounter{revnotes@note}
+\newcounter{revnotes@pending}
+
+% #1 colour, #2 text. Long arguments: an addition may span several paragraphs.
+\newcommand\revnotes@add[2]{\stepcounter{revnotes@add}%
+  \ifrevnotes@marks{\color{#1}#2}\else#2\fi}
+% \sout cannot cross paragraphs: keep deletions to short spans; wrap \cite in \mbox{}.
+\newcommand\revnotes@del[2]{\stepcounter{revnotes@del}%
+  \ifrevnotes@marks{\color{#1}\sout{#2}}\else\@bsphack\@esphack\fi}
+% #1 colour, #2 label, #3 note. Hidden notes leave no double space (\@bsphack/\@esphack).
+\newcommand\revnotes@note[3]{\stepcounter{revnotes@note}%
+  \ifrevnotes@notes{\color{#1}\,\textbf{[#2:}~\textit{#3}\textbf{]}}\else\@bsphack\@esphack\fi}
+
+\DeclareRobustCommand\pending[1]{\stepcounter{revnotes@pending}%
+  \ifrevnotes@strict
+    \PackageError{revnotes}{\string\pending\space left in mode=\revnotes@mode: \detokenize{#1}}%
+      {Resolve the item, or compile with mode=review while it is open.}%
+  \fi
+  {\color{revPending}\textbf{[PENDING: #1]}}}
+
+\newcommand\revnotes@define[2]{%
+  \ifcsname #1\endcsname
+    \PackageError{revnotes}{\expandafter\string\csname #1\endcsname\space is already defined}%
+      {\string\revauthor\space would overwrite it. Remove the old definition or use another key.}%
+  \fi
+  \expandafter\DeclareRobustCommand\csname #1\endcsname{#2}}
+
+% \revauthor{key}{Label}{colour}
+\newcommand\revauthor[3]{%
+  \revnotes@define{#1add}{\revnotes@add{#3}}%
+  \revnotes@define{#1del}{\revnotes@del{#3}}%
+  \revnotes@define{#1note}{\revnotes@note{#3}{#2}}}
+\@onlypreamble\revauthor
+
+\AtEndDocument{%
+  \typeout{revnotes: mode=\revnotes@mode, add=\the\value{revnotes@add}, del=\the\value{revnotes@del},
+    note=\the\value{revnotes@note}, pending=\the\value{revnotes@pending}}%
+  \ifnum\value{revnotes@pending}>0
+    \PackageWarningNoLine{revnotes}{\the\value{revnotes@pending} \string\pending\space item(s) left}%
+  \fi}
+\endinput

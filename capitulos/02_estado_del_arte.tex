@@ -1,0 +1,116 @@
+% =====================================================================
+%  CAPÍTULO 2 · FUNDAMENTOS Y ESTADO DEL ARTE
+%  Función: dar al lector TODO lo que necesita para entender el trabajo y
+%  situarlo frente a lo que ya existe. Es donde más pesa el rigor (citas).
+%  Reglas clave:
+%   - Cada concepto: qué es, cómo funciona, un elemento visual y qué se hace
+%     hoy con él. Explica los términos técnicos la primera vez.
+%   - Compara (tabla con criterios), no enumeres tecnologías.
+%   - Fuentes primarias u oficiales: artículos, documentación, normas.
+%     Evita Wikipedia, blogs, vídeos o foros como fuente principal.
+%   - No repitas aquí el stack: las herramientas van en el Capítulo 3.
+%   - Si hay «Marco teórico» y «Estado del arte» que se repiten, fusiónalos.
+% =====================================================================
+\chapter{Fundamentos y estado del arte}
+\label{cap:estado}
+
+Este capítulo introduce los conceptos necesarios para seguir el resto de la
+memoria y analiza las soluciones existentes, con el fin de identificar el hueco
+que cubre este trabajo.
+
+\section{Conceptos fundamentales}
+\label{sec:conceptos}
+
+\subsection{Arquitectura cliente-servidor}
+\label{sec:cliente-servidor}
+
+Presenta el concepto con tus palabras y apóyalo en fuentes. En una arquitectura
+cliente-servidor, los clientes envían peticiones a un servidor que centraliza
+los datos y la lógica de negocio~\cite{martin2022arquitectura}. La
+Figura~\ref{fig:cliente-servidor} muestra el esquema que sigue este trabajo: la
+aplicación móvil (izquierda) se comunica mediante una \ac{API} \ac{REST} con el
+servidor (centro), que es el único componente que accede a la base de datos
+(derecha). Esta separación permite cambiar el cliente sin modificar los datos.
+
+% GUÍA: cita la figura ANTES de que aparezca y guía al lector por ella
+% (qué mirar y qué concluir). Un pie solo no basta.
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[node distance=2.2cm,
+      caja/.style={draw, rounded corners, minimum width=2.8cm, minimum height=1.1cm,
+                   align=center, fill=gray!8},
+      flecha/.style={-{Stealth[length=2.5mm]}, thick}]
+    \node[caja] (cli) {Aplicación\\móvil};
+    \node[caja, right=of cli] (srv) {Servidor\\(API REST)};
+    \node[caja, right=of srv, shape=cylinder, shape border rotate=90, aspect=0.25,
+          minimum width=2.2cm] (db) {Base de\\datos};
+    \draw[flecha] (cli.20) -- node[above, font=\small] {petición} (srv.160);
+    \draw[flecha] (srv.200) -- node[below, font=\small] {respuesta} (cli.340);
+    \draw[flecha, <->] (srv) -- node[above, font=\small] {SQL} (db);
+  \end{tikzpicture}
+  \caption{Esquema de la arquitectura cliente-servidor del sistema.}
+  \label{fig:cliente-servidor}
+  \fuente{Elaboración propia a partir de~\cite{martin2022arquitectura}.}
+\end{figure}
+
+\subsection{Usabilidad y su medida}
+\label{sec:usabilidad}
+
+Cuando un trabajo usa una métrica, defínela con precisión. La \ac{SUS} es un
+cuestionario de diez ítems que produce una puntuación entre 0 y
+100 y que propuso Brooke~\cite{brooke1996sus}. Para cada participante, la
+puntuación se calcula como
+\begin{equation}
+  \mathrm{SUS} = 2{,}5 \left( \sum_{i\ \text{impar}} (r_i - 1)
+               + \sum_{i\ \text{par}} (5 - r_i) \right),
+  \label{eq:sus}
+\end{equation}
+donde $r_i \in \{1,\dots,5\}$ es la respuesta al ítem $i$. La
+Ecuación~\eqref{eq:sus} se usa en el Capítulo~\ref{cap:pruebas} para evaluar el
+objetivo~\ref{obj:validacion}.
+
+\section{Soluciones existentes}
+\label{sec:soluciones}
+
+En un \ac{TFG} de aplicación, este apartado es el estudio de mercado; en un
+trabajo de investigación, la revisión de trabajos relacionados. En ambos casos
+se analizan las alternativas con los mismos criterios y se resumen en una tabla.
+En este ejemplo se han revisado tres aplicaciones (A, B y C), elegidas por ser
+las más descargadas de su categoría en noviembre de
+2026~\cite{informe_movil2025}, y un \ac{TFG} previo de la \ac{EPS} que abordó un
+problema parecido con tecnologías web~\cite{ferrer2025tfg}.
+
+% GUÍA: datos volátiles (descargas, valoraciones de tienda) siempre con fecha
+% de consulta. Cada alternativa con su logo o captura si es una app.
+
+La Tabla~\ref{tab:comparativa} compara las alternativas con los cuatro criterios
+que se derivan de la motivación. Ninguna de las soluciones analizadas combina la
+ocupación en tiempo real con la reserva desde el móvil, que es precisamente el
+hueco que pretende cubrir \emph{SalaLibre}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Comparativa de las soluciones existentes.}
+  \label{tab:comparativa}
+  \begin{tabularx}{\textwidth}{@{}lCCCC@{}}
+    \toprule
+    \textbf{Solución} & \textbf{Ocupación en tiempo real} & \textbf{Reserva móvil}
+      & \textbf{Avisos} & \textbf{Código abierto} \\
+    \midrule
+    Aplicación A~\cite{ejemplo_appA} & $\times$ & \checkmark & \checkmark & $\times$ \\
+    Aplicación B~\cite{ejemplo_appB} &\checkmark & $\times$ & $\times$ & $\times$ \\
+    Aplicación C~\cite{garcia2024movil} & $\times$ & \checkmark & $\times$ & \checkmark \\
+    \midrule
+    \emph{SalaLibre} (este trabajo) & \checkmark & \checkmark & \checkmark & \checkmark \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia a partir de las fuentes citadas (consulta: noviembre de 2026).}
+\end{table}
+
+\section{Conclusiones del capítulo}
+\label{sec:conclusiones-estado}
+
+Cierra el capítulo con dos o tres frases: qué se ha aprendido y qué decisión
+se toma a partir de ello. En este caso, la falta de soluciones que integren
+ocupación y reserva justifica el desarrollo de una aplicación propia, cuyos
+requisitos se derivan de los criterios de la Tabla~\ref{tab:comparativa}.

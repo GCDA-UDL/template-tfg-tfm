@@ -1,0 +1,28 @@
+# Compilación local (tools/build.sh)
+build/
+
+# Subproductos de LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.lof
+*.lot
+*.lol
+main.pdf
+informe_inicial.pdf
+informe_seguimiento.pdf
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*

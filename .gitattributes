@@ -1,0 +1,6 @@
+# Los scripts mantienen LF en cualquier sistema (Git Bash, Linux, macOS).
+*.sh text eol=lf
+*.tex text
+*.bib text
+*.pdf binary
+*.png binary

@@ -1,0 +1,151 @@
+% =====================================================================
+%  BIBLIOGRAFÍA (biblatex + biber)
+%  - Las entradas marcadas con note = {Referencia ficticia} son EJEMPLOS
+%    inventados para mostrar el formato: bórralas.
+%  - Las de normativa, documentación oficial y la escala SUS son reales.
+%  - Solo se imprimen las entradas que citas con \cite{clave}.
+%  - Verifica cada entrada contra la fuente original (autores, año, DOI).
+%  - Webs: url + urldate (fecha de consulta, AAAA-MM-DD).
+%  - Protege mayúsculas y siglas del título con llaves: {SUS}, {Android}.
+% =====================================================================
+
+% --- Artículo de revista (ficticio) -----------------------------------
+@article{garcia2024movil,
+  author  = {García Pérez, Ana and Ruiz Soler, Jordi},
+  title   = {Aplicaciones móviles para la gestión de espacios universitarios: una revisión},
+  journal = {Revista de Ejemplo de Ingeniería Informática},
+  volume  = {12},
+  number  = {3},
+  pages   = {45--62},
+  year    = {2024},
+  doi     = {10.5555/ejemplo.2024.003},
+  note    = {Referencia ficticia},
+}
+
+% --- Libro (ficticio) --------------------------------------------------
+@book{martin2022arquitectura,
+  author    = {Martín Gómez, Laura},
+  title     = {Arquitectura del software: principios y patrones},
+  edition   = {2},
+  publisher = {Editorial de Ejemplo},
+  address   = {Barcelona},
+  year      = {2022},
+  note      = {Referencia ficticia},
+}
+
+% --- Capítulo de libro (real): fuente primaria de la escala SUS ---------
+@incollection{brooke1996sus,
+  author    = {Brooke, John},
+  title     = {{SUS}: A `quick and dirty' usability scale},
+  booktitle = {Usability Evaluation in Industry},
+  editor    = {Jordan, Patrick W. and Thomas, B. and Weerdmeester, Bernard A. and McClelland, Ian L.},
+  publisher = {Taylor \& Francis},
+  address   = {London},
+  year      = {1996},
+  pages     = {189--194},
+}
+
+% --- Informe técnico con URL (ficticio) --------------------------------
+@report{informe_movil2025,
+  author      = {{Observatorio Ficticio de Tecnología Educativa}},
+  title       = {Uso del móvil en la vida académica: informe anual 2025},
+  type        = {Informe técnico},
+  institution = {Observatorio Ficticio de Tecnología Educativa},
+  year        = {2025},
+  url         = {https://example.org/informe-movil-2025},
+  urldate     = {2026-11-15},
+  note        = {Referencia ficticia},
+}
+
+% --- Trabajo de Fin de Grado previo (ficticio) --------------------------
+@thesis{ferrer2025tfg,
+  author      = {Ferrer Vidal, Marc},
+  title       = {Sistema de reservas de laboratorios con tecnologías web},
+  type        = {Treball de Fi de Grau},
+  institution = {Escola Politècnica Superior, Universitat de Lleida},
+  year        = {2025},
+  note        = {Referencia ficticia},
+}
+
+% --- Páginas web / fichas de aplicaciones (ficticias) --------------------
+@online{ejemplo_appA,
+  author  = {{Empresa Ejemplo A}},
+  title   = {Aplicación A: reserva de espacios},
+  year    = {2026},
+  url     = {https://example.org/app-a},
+  urldate = {2026-11-15},
+  note    = {Referencia ficticia},
+}
+
+@online{ejemplo_appB,
+  author  = {{Empresa Ejemplo B}},
+  title   = {Aplicación B: ocupación de bibliotecas},
+  year    = {2026},
+  url     = {https://example.org/app-b},
+  urldate = {2026-11-15},
+  note    = {Referencia ficticia},
+}
+
+% --- Documentación oficial de las herramientas (real) --------------------
+@manual{doc_kotlin,
+  author       = {{JetBrains}},
+  title        = {Kotlin Documentation},
+  url          = {https://kotlinlang.org/docs/home.html},
+  urldate      = {2026-11-15},
+}
+
+@manual{doc_python,
+  author       = {{Python Software Foundation}},
+  title        = {Python 3.12 Documentation},
+  url          = {https://docs.python.org/3.12/},
+  urldate      = {2026-11-15},
+}
+
+@manual{doc_fastapi,
+  author       = {Ramírez, Sebastián},
+  title        = {{FastAPI} Documentation},
+  url          = {https://fastapi.tiangolo.com/},
+  urldate      = {2026-11-15},
+}
+
+@manual{doc_postgresql,
+  author       = {{The PostgreSQL Global Development Group}},
+  title        = {{PostgreSQL} 16 Documentation},
+  url          = {https://www.postgresql.org/docs/16/},
+  urldate      = {2026-11-15},
+}
+
+@manual{doc_docker,
+  author       = {{Docker Inc.}},
+  title        = {Docker Documentation},
+  url          = {https://docs.docker.com/},
+  urldate      = {2026-11-15},
+}
+
+% --- Normativa y estándares (real) ----------------------------------------
+@misc{rgpd2016,
+  author       = {{Parlamento Europeo y Consejo de la Unión Europea}},
+  title        = {Reglamento ({UE}) 2016/679, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos (Reglamento general de protección de datos)},
+  howpublished = {Diario Oficial de la Unión Europea, L 119, pp. 1--88},
+  date         = {2016-05-04},
+  url          = {https://eur-lex.europa.eu/eli/reg/2016/679/oj},
+  urldate      = {2026-11-15},
+}
+
+@misc{lopdgdd2018,
+  author       = {{Jefatura del Estado}},
+  title        = {Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales},
+  howpublished = {Boletín Oficial del Estado, núm. 294},
+  date         = {2018-12-06},
+  url          = {https://www.boe.es/eli/es/lo/2018/12/05/3},
+  urldate      = {2026-11-15},
+}
+
+@online{wcag22,
+  author       = {{World Wide Web Consortium (W3C)}},
+  title        = {Web Content Accessibility Guidelines ({WCAG}) 2.2},
+  subtitle     = {W3C Recommendation},
+  year         = {2023},
+  url          = {https://www.w3.org/TR/WCAG22/},
+  urldate      = {2026-11-15},
+}

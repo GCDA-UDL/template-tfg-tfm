@@ -1,0 +1,28 @@
+% =====================================================================
+%  RESUM (català) · una pàgina · mateix contingut que el Resumen
+% =====================================================================
+\begin{otherlanguage}{catalan}
+\chapter*{\resumenname}
+\pdfbookmark[0]{\resumenname}{resum}
+
+% Exemple d'estructura (substitueix-lo pel teu resum):
+Reservar un espai d'estudi al campus obliga avui a consultar diverses fonts i
+no permet saber si una sala és lliure en aquell moment. Aquest treball presenta
+\emph{SalaLibre}, una aplicació mòbil i un servei web que mostren l'ocupació de
+les sales en temps real i permeten reservar-les en dos passos.
+
+La solució s'ha desenvolupat amb una metodologia iterativa en tres increments.
+L'aplicació Android es comunica amb una API REST que desa les reserves en una
+base de dades relacional i notifica els canvis als clients. S'han definit dotze
+requisits funcionals i cinc de no funcionals, i cadascun s'ha validat amb, com
+a mínim, un cas de prova.
+
+Les proves de càrrega mostren que, amb memòria cau, la latència mitjana es manté
+per sota dels \qty{100}{ms} fins a 400 usuaris concurrents, mentre que la versió
+inicial superava aquest llindar a partir de 200. Una prova d'usabilitat amb vuit
+estudiants va obtenir una puntuació SUS mitjana de 81 sobre 100. Les dades d'aquest exemple són fictícies.
+
+\vspace{1em}
+\noindent\textbf{\clavesname:} \tfgclavesCA
+\end{otherlanguage}
+\cleardoublepage

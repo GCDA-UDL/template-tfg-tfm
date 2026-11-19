@@ -1,0 +1,29 @@
+% =====================================================================
+%  ABSTRACT (English) · one page · same content as the Resumen
+% =====================================================================
+\begin{otherlanguage}{english}
+\chapter*{\resumenname}
+\pdfbookmark[0]{\resumenname}{abstract}
+
+% Example structure (replace it with your own abstract):
+Booking a study room on campus currently requires checking several sources, and
+it is not possible to know whether a room is free right now. This work presents
+\emph{SalaLibre}, a mobile application and a web service that show room
+occupancy in real time and allow a room to be booked in two steps.
+
+The solution was developed with an iterative methodology in three increments.
+The Android application communicates with a REST API that stores bookings in a
+relational database and notifies clients of every change. Twelve functional and
+five non-functional requirements were defined, and each one was validated with
+at least one test case.
+
+Load tests show that, with caching, the mean latency stays below \qty{100}{ms} up
+to 400 concurrent users, whereas the initial version exceeded that threshold
+from 200 users onwards. A usability test with eight students obtained a mean
+SUS score of 81 out of 100.
+The data in this example are fictitious.
+
+\vspace{1em}
+\noindent\textbf{\clavesname:} \tfgclavesEN
+\end{otherlanguage}
+\cleardoublepage

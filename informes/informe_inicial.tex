@@ -1,0 +1,66 @@
+% !TEX program = pdflatex
+% =====================================================================
+%  INFORME INICIAL (Portafoli, 10 % de la nota)
+%  Lo evalúa la dirección entre las semanas 4 y 6 del trabajo.
+%  Contenido exigido por el Portafoli de la EPS:
+%    objetivos · índice de la memoria · tareas · planificación temporal ·
+%    fuentes y bibliografía consultada.
+%  Aspectos que se evalúan: has entendido objetivos y contexto, has
+%  planificado bien las tareas y la relación tiempo-tareas es realista.
+%  Compilar: en Overleaf, Menú > Documento principal > informes/informe_inicial.tex
+%            en local, bash tools/build.sh informes/informe_inicial
+%  Extensión orientativa: 3-5 páginas.
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+\input{config/datos}
+\input{config/preambulo}
+\usepackage[mode=review]{revnotes}
+\revauthor{vitor}{Director}{revTeal}
+\addbibresource{bibliografia.bib}
+\pagestyle{plain}   % informe corto: solo número de página
+
+\begin{document}
+\begin{center}
+  {\Large\bfseries Informe inicial del \tfgsigla\par}\vspace{4pt}
+  {\large \tfgtitulo\par}\vspace{6pt}
+  \tfgautor{} · \tfgtitulacion\\
+  Dirección: \tfgdirector\ifx\tfgcodirector\empty\else{} y \tfgcodirector\fi{} · Curso \tfgcurso
+\end{center}
+
+\section{Contexto y objetivos}
+Resume en un párrafo el problema y su contexto (con alguna cita). Después,
+enumera los objetivos tal como aparecerán en la memoria:
+\begin{enumerate}[label=\textbf{O\arabic*.}]
+  \item Objetivo específico y medible.
+  \item Objetivo específico y medible.
+\end{enumerate}
+
+\section{Índice previsto de la memoria}
+Copia el índice provisional de capítulos y secciones (dos niveles), por ejemplo:
+1.~Introducción; 2.~Fundamentos y estado del arte; 3.~Metodología, planificación
+y viabilidad; 4.~Análisis y diseño; 5.~Implementación; 6.~Pruebas y resultados;
+7.~Conclusiones y trabajo futuro.
+
+\section{Tareas a realizar}
+Lista las tareas con una frase cada una y el entregable que producen
+(documento, prototipo, módulo, informe de pruebas\ldots).
+
+\section{Planificación temporal}
+La Figura~\ref{fig:plan-inicial} muestra la planificación prevista, desde el
+inicio del trabajo hasta el depósito y la defensa.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figuras/cronograma}
+  \caption{Planificación prevista.}
+  \label{fig:plan-inicial}
+  \fuente{Elaboración propia.}
+\end{figure}
+
+\section{Fuentes consultadas}
+Cita aquí las fuentes que ya has leído y que usarás en el estado del
+arte~\cite{garcia2024movil,martin2022arquitectura}. Solo fuentes que hayas
+consultado de verdad.
+
+\printbibliography[heading=subbibliography,title={Referencias}]
+\end{document}

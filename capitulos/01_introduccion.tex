@@ -1,0 +1,83 @@
+% =====================================================================
+%  CAPÍTULO 1 · INTRODUCCIÓN
+%  Función: situar el problema, justificar por qué importa, fijar los
+%  objetivos (numerados y medibles) y anunciar la estructura del documento.
+%  Reglas clave (ver guía):
+%   - Contexto (dónde estamos) ≠ Motivación (por qué hace falta resolverlo).
+%   - La motivación NO adelanta resultados.
+%   - Objetivos O1..On verificables: luego se cierran UNO A UNO en conclusiones.
+%   - Define el nombre del producto y cada sigla en su primera aparición.
+%   - Toda cifra o afirmación de mercado lleva cita.
+% =====================================================================
+\chapter{Introducción}
+\label{cap:introduccion}
+
+Este capítulo presenta el contexto del trabajo, la motivación que lo origina,
+los objetivos que se persiguen y la organización del resto de la memoria.
+
+\section{Contexto}
+\label{sec:contexto}
+
+Describe el ámbito en el que se sitúa el trabajo: qué sector, qué usuarios, qué
+tecnología. Cada dato concreto necesita su fuente. Por ejemplo: según un informe
+reciente, el 78\,\% de los estudiantes universitarios usa el móvil para
+gestionar su actividad académica~\cite{informe_movil2025}.
+
+% GUÍA: escribe la referencia pegada a la afirmación que sostiene, no al final
+% del párrafo. Usa ~ antes de \cite para que no se separe de la palabra.
+
+\section{Motivación}
+\label{sec:motivacion}
+
+Explica el problema concreto que se quiere resolver y por qué las soluciones
+actuales no bastan. En este ejemplo, la reserva de salas de estudio obliga a
+consultar varias fuentes y no informa de la ocupación real, un problema que
+trabajos previos ya han señalado~\cite{garcia2024movil}. La aplicación que se
+desarrolla en este \ac{TFG} se llama \emph{SalaLibre}.
+
+\section{Objetivos}
+\label{sec:objetivos}
+
+El objetivo general de este trabajo es diseñar, implementar y validar una
+aplicación móvil que permita consultar la ocupación de las salas de estudio en
+tiempo real y reservarlas. Para alcanzarlo se plantean los siguientes objetivos
+específicos:
+
+\begin{enumerate}[label=\textbf{O\arabic*.}, ref=O\arabic*]
+  \item \label{obj:estado} Analizar las soluciones existentes y sus carencias
+        mediante una comparativa con criterios explícitos.
+  \item \label{obj:app} Desarrollar una aplicación Android que permita reservar
+        una sala en un máximo de dos pasos.
+  \item \label{obj:rendimiento} Conseguir una latencia media inferior a
+        \qty{100}{ms} con 200 usuarios concurrentes.
+  \item \label{obj:validacion} Validar la usabilidad con usuarios reales y
+        obtener una puntuación \ac{SUS} igual o superior a 70.
+\end{enumerate}
+
+% GUÍA: un objetivo es medible si al final puedes decir «cumplido / parcial /
+% no cumplido» con una evidencia. «Mejorar el rendimiento» no lo es;
+% «latencia media < 100 ms con 200 usuarios» sí.
+
+\section{Alcance}
+\label{sec:alcance}
+
+Indica qué entra y qué queda fuera del trabajo. Por ejemplo, esta versión cubre
+Android y la gestión de reservas, pero no incluye una versión iOS ni el pago de
+servicios. Si durante el desarrollo el alcance cambia, actualiza esta sección y
+los objetivos: el título y los objetivos no pueden prometer más de lo entregado.
+
+\section{Estructura del documento}
+\label{sec:estructura}
+
+La memoria se organiza en siete capítulos. El Capítulo~\ref{cap:estado} revisa
+los fundamentos y las soluciones existentes. El Capítulo~\ref{cap:metodologia}
+describe la metodología, la planificación y la viabilidad del proyecto. El
+Capítulo~\ref{cap:diseno} recoge los requisitos y el diseño de la solución, y el
+Capítulo~\ref{cap:implementacion} su implementación. El
+Capítulo~\ref{cap:pruebas} presenta las pruebas y los resultados obtenidos y,
+por último, el Capítulo~\ref{cap:conclusiones} expone las conclusiones, las
+limitaciones y el trabajo futuro. Los apéndices incluyen el enlace al
+repositorio, el vídeo de demostración y el manual de instalación.
+
+% GUÍA: esta lista debe coincidir EXACTAMENTE con el índice. Si cambias,
+% añades o quitas un capítulo, actualiza este párrafo.

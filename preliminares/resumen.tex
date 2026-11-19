@@ -1,0 +1,32 @@
+% =====================================================================
+%  RESUMEN (castellano) · una página · 200-300 palabras
+%  Debe decir, por este orden: problema y contexto (2-3 frases), qué se ha
+%  hecho y cómo, qué se ha obtenido (con cifras) y qué aporta.
+%  No es una introducción: el lector tiene que saber el RESULTADO.
+%  Resum y Abstract dicen lo mismo en su idioma, cada uno en su página.
+% =====================================================================
+\begin{otherlanguage}{spanish}
+\chapter*{\resumenname}
+\pdfbookmark[0]{\resumenname}{resumen}
+
+% Ejemplo de estructura (sustitúyelo por tu propio resumen):
+Reservar un espacio de estudio en el campus obliga hoy a consultar varias
+fuentes y no permite saber si una sala está libre en ese momento. Este trabajo
+presenta \emph{SalaLibre}, una aplicación móvil y un servicio web que muestran
+la ocupación de las salas en tiempo real y permiten reservarlas en dos pasos.
+
+La solución se ha desarrollado con una metodología iterativa en tres
+incrementos. La aplicación Android se comunica con una API REST que guarda las
+reservas en una base de datos relacional y notifica los cambios a los clientes.
+Se han definido doce requisitos funcionales y cinco no funcionales, y cada uno
+se ha validado con, al menos, un caso de prueba.
+
+Las pruebas de carga muestran que, con caché, la latencia media se mantiene por
+debajo de \qty{100}{ms} hasta 400 usuarios concurrentes, mientras que la versión
+inicial superaba ese umbral a partir de 200. Una prueba de usabilidad con ocho
+estudiantes obtuvo una puntuación SUS media de 81 sobre 100. Los datos de este ejemplo son ficticios.
+
+\vspace{1em}
+\noindent\textbf{\clavesname:} \tfgclavesES
+\end{otherlanguage}
+\cleardoublepage

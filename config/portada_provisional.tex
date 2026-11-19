@@ -1,0 +1,31 @@
+% =====================================================================
+%  PORTADA PROVISIONAL
+%  Solo se usa mientras NO exista portada/portada.pdf.
+%  La versión que se deposita DEBE llevar la portada oficial de la EPS
+%  (ver portada/README.md). Por eso aquí hay un \pending: en mode=final
+%  la compilación falla hasta que pongas la portada oficial.
+% =====================================================================
+\begin{titlepage}
+  \thispagestyle{empty}
+  \centering
+  {\large\scshape \tfguniversidad\par}
+  {\normalsize \tfgcentro{} · \tfgcampus\par}
+  \vspace{3cm}
+  {\Huge\bfseries\MakeUppercase{\tfgtipo}\par}
+  \vspace{2.5cm}
+  \begin{flushleft}
+    \renewcommand{\arraystretch}{1.6}
+    \begin{tabular}{@{}p{0.30\textwidth}p{0.62\textwidth}@{}}
+      \textbf{Estudiant:}  & \tfgautor \\
+      \textbf{Titulació:}  & \tfgtitulacion \\
+      \textbf{Títol:}      & \tfgtitulo \\
+      \textbf{Director/a:} & \tfgdirector \\
+      \ifx\tfgcodirector\empty\else \textbf{Codirector/a:} & \tfgcodirector \\ \fi
+      \textbf{Presentació:} & Mes: \tfgmes \quad Any: \tfganyo \\
+    \end{tabular}
+  \end{flushleft}
+  \vfill
+  \fbox{\parbox{0.9\textwidth}{\centering\small
+    \pending{Portada provisional: sustituir por la portada oficial de la EPS
+    (portada/portada.pdf)}}}
+\end{titlepage}

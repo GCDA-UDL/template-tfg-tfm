@@ -1,0 +1,67 @@
+% =====================================================================
+%  CAPÍTULO 7 · CONCLUSIONES Y TRABAJO FUTURO
+%  Función: cerrar el círculo. Cada objetivo de la Sección 1.3 se retoma
+%  UNO A UNO: cumplido / parcialmente / no cumplido, con su evidencia.
+%  Reglas clave:
+%   - No introduzcas aquí resultados nuevos que no estén en el Cap. 6.
+%   - Limitaciones (lo que no salió) separadas del trabajo futuro.
+%   - Trabajo futuro: ~1 página, concreto y ligado a limitaciones reales.
+% =====================================================================
+\chapter{Conclusiones y trabajo futuro}
+\label{cap:conclusiones}
+
+Este capítulo valora el grado de cumplimiento de los objetivos, resume las
+aportaciones y las limitaciones del trabajo y propone líneas de continuación.
+
+\section{Cumplimiento de los objetivos}
+\label{sec:cumplimiento}
+
+La Tabla~\ref{tab:cumplimiento} resume el estado final de cada objetivo
+específico planteado en la Sección~\ref{sec:objetivos}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Grado de cumplimiento de los objetivos.}
+  \label{tab:cumplimiento}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lLlL@{}}
+    \toprule
+    \textbf{Obj.} & \textbf{Descripción} & \textbf{Estado} & \textbf{Evidencia} \\
+    \midrule
+    \ref{obj:estado}      & Comparativa de soluciones   & Cumplido & Sección~\ref{sec:soluciones} \\
+    \ref{obj:app}         & Aplicación Android funcional & Cumplido & Tabla~\ref{tab:casos} \\
+    \ref{obj:rendimiento} & Latencia $<$ \qty{100}{ms}   & Cumplido & Figura~\ref{fig:latencia} \\
+    \ref{obj:validacion}  & Validación con usuarios      & Parcial  & SUS = 81, pero $n = 8$ (Sección~\ref{sec:discusion}) \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+Desarrolla después cada objetivo en uno o dos párrafos. Por ejemplo: el
+objetivo~\ref{obj:rendimiento} se ha cumplido, ya que con la caché la latencia
+media se mantiene en \qty{92}{ms} con 400 usuarios, el doble de la carga exigida
+por RNF-01. El objetivo~\ref{obj:validacion} se considera parcialmente cumplido:
+la puntuación supera el umbral, pero la muestra es pequeña.
+
+\section{Conclusiones}
+\label{sec:conclusiones}
+
+Resume qué aporta el trabajo y qué se ha aprendido, tanto en lo técnico como en
+la gestión del proyecto. Las conclusiones se apoyan en los resultados del
+Capítulo~\ref{cap:pruebas}; no repitas la introducción ni añadas afirmaciones
+que no se hayan demostrado.
+
+\section{Limitaciones}
+\label{sec:limitaciones}
+
+Enumera con honestidad lo que el trabajo no cubre o no ha podido validar y por
+qué: por ejemplo, la ausencia de pruebas en varios servidores o la muestra
+reducida de la prueba de usabilidad.
+
+\section{Trabajo futuro}
+\label{sec:futuro}
+
+Propón tres o cuatro líneas concretas y priorizadas, cada una ligada a una
+limitación. Por ejemplo: repetir la prueba de usabilidad con al menos treinta
+usuarios de distintos grados; desplegar el servidor en dos nodos para medir la
+escalabilidad horizontal, y publicar una versión para iOS.

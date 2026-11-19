@@ -1,0 +1,133 @@
+% =====================================================================
+%  CAPÍTULO 4 · ANÁLISIS Y DISEÑO
+%  Función: definir QUÉ debe hacer el sistema (requisitos verificables) y
+%  CÓMO se ha decidido construirlo (arquitectura y decisiones justificadas).
+%  Reglas clave:
+%   - Requisitos con ID (RF-01, RNF-01), atómicos y verificables. Di de
+%     dónde salen (estado del arte, entrevistas, normativa...).
+%   - Lo que no has medido no se afirma como cumplido («cumple WCAG AA»
+%     solo si lo has comprobado y lo muestras).
+%   - Cada diagrama se explica en el texto componente a componente.
+%   - Trabajos con datos/ML: añade aquí (o en el Cap. 5) una ficha por
+%     dataset: estructura, nº de muestras y particiones, tipo de dato con
+%     un ejemplo visual, referencia y protocolo de evaluación.
+% =====================================================================
+\chapter{Análisis y diseño}
+\label{cap:diseno}
+
+Este capítulo especifica los requisitos de \emph{SalaLibre} y describe la
+arquitectura y las decisiones de diseño que se tomaron para cumplirlos.
+
+\section{Requisitos}
+\label{sec:requisitos}
+
+Los requisitos se obtuvieron de la comparativa del
+Capítulo~\ref{cap:estado} y de una entrevista con el personal de la biblioteca.
+Cada requisito tiene un identificador que se usa en las pruebas del
+Capítulo~\ref{cap:pruebas}. La Tabla~\ref{tab:rf} recoge los requisitos
+funcionales y la Tabla~\ref{tab:rnf}, los no funcionales.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Requisitos funcionales (extracto).}
+  \label{tab:rf}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lLl@{}}
+    \toprule
+    \textbf{ID} & \textbf{Descripción} & \textbf{Objetivo} \\
+    \midrule
+    RF-01 & El usuario puede consultar las salas libres en este momento. & \ref{obj:app} \\
+    RF-02 & El usuario puede reservar una sala libre en dos pasos como máximo. & \ref{obj:app} \\
+    RF-03 & El usuario recibe una notificación 10 minutos antes de su reserva. & \ref{obj:app} \\
+    RF-04 & El sistema impide dos reservas solapadas de la misma sala. & \ref{obj:app} \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Requisitos no funcionales (extracto).}
+  \label{tab:rnf}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lLl@{}}
+    \toprule
+    \textbf{ID} & \textbf{Descripción y criterio de aceptación} & \textbf{Objetivo} \\
+    \midrule
+    RNF-01 & Rendimiento: latencia media $<$ \qty{100}{ms} con 200 usuarios concurrentes. & \ref{obj:rendimiento} \\
+    RNF-02 & Usabilidad: puntuación \ac{SUS} media $\geq 70$ con al menos 8 usuarios. & \ref{obj:validacion} \\
+    RNF-03 & Seguridad: las contraseñas se almacenan con una función de \emph{hash} con sal. & \ref{obj:app} \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+% GUÍA: «El sistema será escalable» NO es verificable. Da un criterio medible
+% o márcalo explícitamente como objetivo de diseño no medido.
+
+\section{Arquitectura del sistema}
+\label{sec:arquitectura}
+
+La Figura~\ref{fig:arquitectura} muestra la arquitectura en tres capas. La capa
+de presentación (arriba) es la aplicación Android, que solo se comunica con el
+servidor mediante la \ac{API}. La capa de lógica (centro) valida las reservas y
+envía las notificaciones. La capa de datos (abajo) guarda salas, usuarios y
+reservas. Se eligió separar la lógica en el servidor para que la regla RF-04
+(sin reservas solapadas) se compruebe en un único punto, dentro de una
+transacción de la base de datos.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      capa/.style={draw, rounded corners, minimum width=11.8cm, minimum height=1.3cm,
+                   align=center, fill=#1},
+      comp/.style={draw, rounded corners, fill=white, minimum width=2.7cm,
+                   minimum height=0.7cm, font=\small},
+      flecha/.style={-{Stealth[length=2.5mm]}, thick}]
+    \node[capa=RoyalBlue!10] (pres) {};
+    \node[anchor=west, font=\small\bfseries] at (pres.west) {\ Presentación};
+    \node[comp] at ([xshift=0.6cm]pres.center) (ui) {Pantallas (UI)};
+    \node[comp, right=0.4cm of ui] (vm) {Estado de la vista};
+    \node[capa=ForestGreen!10, below=0.6cm of pres] (log) {};
+    \node[anchor=west, font=\small\bfseries] at (log.west) {\ Lógica};
+    \node[comp] at ([xshift=0.6cm]log.center) (api) {API REST};
+    \node[comp, right=0.4cm of api] (not) {Notificaciones};
+    \node[capa=BrickRed!10, below=0.6cm of log] (dat) {};
+    \node[anchor=west, font=\small\bfseries] at (dat.west) {\ Datos};
+    \node[comp] at ([xshift=0.6cm]dat.center) (db) {Base de datos};
+    \draw[flecha] (ui) -- (api);
+    \draw[flecha] (api) -- (db);
+    \draw[flecha] (not.north) -- (vm.south);
+  \end{tikzpicture}
+  \caption{Arquitectura en capas de \emph{SalaLibre}.}
+  \label{fig:arquitectura}
+  \fuente{Elaboración propia.}
+\end{figure}
+
+\section{Diseño de la interfaz}
+\label{sec:diseno-interfaz}
+
+En una aplicación, muestra los prototipos (\emph{wireframes}) y el mapa de
+navegación, y relaciónalos con los requisitos. La
+Figura~\ref{fig:navegacion} resume la navegación: desde la pantalla de inicio se
+llega a la reserva en dos pasos, como exige RF-02.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[node distance=1.6cm,
+      pant/.style={draw, rounded corners, fill=gray!8, minimum width=2.4cm,
+                   minimum height=0.9cm, align=center, font=\small},
+      flecha/.style={-{Stealth[length=2.5mm]}, thick}]
+    \node[pant] (login) {Inicio de\\sesión};
+    \node[pant, right=of login] (inicio) {Inicio\\(salas libres)};
+    \node[pant, right=of inicio] (reserva) {Nueva\\reserva};
+    \node[pant, below=0.8cm of inicio] (mis) {Mis\\reservas};
+    \draw[flecha] (login) -- (inicio);
+    \draw[flecha] (inicio) -- node[above, font=\scriptsize] {paso 1} (reserva);
+    \draw[flecha] (reserva.south) |- node[pos=0.25, right, font=\scriptsize] {paso 2} (mis.east);
+    \draw[flecha] (inicio) -- (mis);
+  \end{tikzpicture}
+  \caption{Mapa de navegación de la aplicación.}
+  \label{fig:navegacion}
+  \fuente{Elaboración propia.}
+\end{figure}

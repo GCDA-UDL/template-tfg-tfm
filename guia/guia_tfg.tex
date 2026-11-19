@@ -1,0 +1,618 @@
+% !TEX program = pdflatex
+% =====================================================================
+%  GUÍA PARA EL TFG / TFM · recomendaciones de la dirección
+%  Compilar en local:  bash tools/build.sh guia/guia_tfg
+%  En Overleaf:        Menú > Documento principal > guia/guia_tfg.tex
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\newcommand{\idiomadocumento}{spanish}
+\newcommand{\estilocitas}{ieee}
+\input{config/preambulo}
+\usepackage[mode=final]{revnotes}
+\addbibresource{guia/guia.bib}
+\usepackage[most]{tcolorbox}
+\usepackage[titles]{tocloft}
+\setlength{\cftsecnumwidth}{2em}
+\setlength{\cftsubsecnumwidth}{2.8em}
+\setcounter{tocdepth}{2}
+
+\newcommand{\guiaversion}{1.0 (noviembre de 2026)}
+\hypersetup{pdftitle={Guía para el TFG/TFM},pdfauthor={Vitor da Silva}}
+
+% --- Cajas -----------------------------------------------------------
+\newtcolorbox{regla}[1][]{enhanced, breakable, colback=RoyalBlue!5, colframe=RoyalBlue!70!black,
+  fonttitle=\bfseries, title={#1}, boxrule=0.6pt, arc=2pt, left=6pt, right=6pt}
+\newtcolorbox{aviso}[1][]{enhanced, breakable, colback=BrickRed!5, colframe=BrickRed!80!black,
+  fonttitle=\bfseries, title={#1}, boxrule=0.6pt, arc=2pt, left=6pt, right=6pt}
+\newcommand{\cmd}[1]{\texttt{\textbackslash #1}}
+\newcommand{\antes}[1]{\textcolor{BrickRed!80!black}{\textbf{Antes:}}~«#1»}
+\newcommand{\despues}[1]{\textcolor{ForestGreen!80!black}{\textbf{Después:}}~«#1»}
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label=$\square$, itemsep=1pt, leftmargin=1.6em}
+
+\begin{document}
+
+% =====================================================================
+\begin{titlepage}
+  \centering
+  \vspace*{3cm}
+  {\Huge\bfseries Guía para el TFG y el TFM\par}
+  \vspace{0.8cm}
+  {\Large Estructura, redacción, citas, figuras, pruebas y uso de la IA\par}
+  \vspace{2.5cm}
+  {\large Grau en Enginyeria Informàtica\\ Escola Politècnica Superior · Universitat de Lleida\par}
+  \vspace{2.5cm}
+  {\large Vitor da Silva\par}
+  \vfill
+  {\small Versión \guiaversion\par}
+\end{titlepage}
+
+\tableofcontents
+\clearpage
+
+% =====================================================================
+\section*{Antes de empezar}
+\addcontentsline{toc}{section}{Antes de empezar}
+
+Esta guía reúne las recomendaciones que doy a todos los estudiantes que hacen el
+Trabajo de Fin de Grado (TFG) o de Máster (TFM) conmigo. Sale de la normativa de
+la EPS~\cite{eps_reglament2024,eps_portafoli2025,eps_terminis2025} y, sobre todo,
+de los comentarios que he repetido una y otra vez al revisar memorias. Casi
+todos los errores que verás aquí los cometió alguien antes que tú; evitarlos
+desde el principio te ahorra semanas de correcciones al final.
+
+Úsala junto con la plantilla de LaTeX: la plantilla ya aplica la mayoría de las
+reglas de formato, y cada capítulo trae comentarios (\texttt{\% GUÍA:}) con lo
+que tiene que contener. Lee la guía entera una vez al empezar y vuelve a las
+listas de comprobación de la Sección~\ref{sec:checklists} antes de cada entrega.
+
+\begin{regla}[Las diez reglas que más nota cuestan]
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Trabajo propio.} Nunca uses el TFG de otra persona como base: se
+        coteja y un solapamiento grande hace que el trabajo no sea defendible.
+  \item \textbf{Portada oficial completa}: título idéntico al de la propuesta,
+        todos los directores, mes y año. Es el fallo más repetido.
+  \item \textbf{Objetivos numerados y medibles} (O1, O2\ldots), que se cierran
+        uno a uno en las conclusiones.
+  \item \textbf{Trazabilidad}: objetivo $\rightarrow$ requisito $\rightarrow$
+        prueba $\rightarrow$ conclusión, con una tabla que lo demuestre.
+  \item \textbf{Lo que no has hecho no se presenta como hecho.} Una prueba
+        propuesta no es una prueba realizada.
+  \item \textbf{Pruebas con evidencia}: casos con resultado esperado y obtenido,
+        no «se ha probado manualmente».
+  \item \textbf{Toda afirmación con fuente} y un único estilo de cita en todo el
+        documento.
+  \item \textbf{Resumen, Resum y Abstract}, cada uno en su página y con el mismo
+        contenido.
+  \item \textbf{Un único cronograma}, en pasado, que llegue hasta el depósito y
+        la defensa.
+  \item \textbf{Toda figura y tabla citada e interpretada en el texto}, con pie
+        breve y fuente.
+\end{enumerate}
+\end{regla}
+
+% =====================================================================
+\section{El proceso: calendario y evaluación}
+\label{sec:proceso}
+
+\subsection{Fases y plazos}
+
+El TFG del grado es un trabajo individual y autónomo de 15~ECTS, unas 375 horas
+de dedicación, hecho bajo la orientación de la dirección. La
+Tabla~\ref{tab:fases} resume las fases según el reglamento de la
+EPS~\cite{eps_reglament2024} y el esquema de plazos~\cite{eps_terminis2025}. Las
+fechas concretas cambian cada curso: consúltalas siempre en la web de la EPS.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Fases del TFG/TFM y qué hay que entregar en cada una.}
+  \label{tab:fases}
+  \small
+  \begin{tabularx}{\textwidth}{@{}p{3.1cm}p{3.6cm}L@{}}
+    \toprule
+    \textbf{Fase} & \textbf{Cuándo} & \textbf{Qué se entrega o se exige} \\
+    \midrule
+    Propuesta & Al menos 10 días antes del plazo de matrícula & Documento de propuesta con director/es, título previsto, objetivos, temporización y palabras clave. Haber superado el 75\,\% de los créditos (grado de 4 años) o el 40\,\% (máster). \\
+    Matrícula & Inicio del 1.\textsuperscript{er} o del 2.\textsuperscript{o} semestre & Propuesta ya presentada y matrícula de todos los créditos pendientes. \\
+    Informe inicial & Semanas 4--6 & Objetivos, índice previsto, tareas, planificación y fuentes consultadas. 10\,\% de la nota. \\
+    Informe de seguimiento & Semanas 10--12 & Evolución frente al plan, evaluación crítica, decisiones técnicas y planificación de lo pendiente. 10\,\% de la nota. \\
+    Documento final & Al menos 3 semanas antes de la defensa & La memoria completa. 50\,\% de la nota. \\
+    Depósito & Al menos 5 días hábiles antes de la defensa & Solo si los tres ítems anteriores suman 3,5 puntos o más. \\
+    Defensa & En las fechas que publica la EPS & Presentación pública de 45 minutos como máximo y preguntas del tribunal. 30\,\% de la nota. \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia a partir de~\cite{eps_reglament2024,eps_terminis2025}.}
+\end{table}
+
+Las plantillas de \texttt{informes/} cubren exactamente lo que el Portafoli
+pide para el informe inicial y el de seguimiento. Entrégalos a tiempo: son el
+20\,\% de la nota y la única ocasión de corregir el rumbo antes del final.
+
+\subsection{Qué se evalúa en la memoria}
+
+El documento final pesa la mitad de la nota y lo evalúa la dirección con el
+Portafoli~\cite{eps_portafoli2025}. Conviene conocer los criterios antes de
+escribir:
+
+\begin{itemize}
+  \item \textbf{Redacción y estructura (0--2 puntos):} memoria entendible y
+        coherente, ortografía y gramática correctas, contenido original y uso
+        de herramientas adecuadas para documentos científico-técnicos.
+  \item \textbf{Dificultad e innovación (0--1):} innovación, integración de
+        conocimientos del grado, aprendizaje de tecnologías nuevas y pruebas de
+        laboratorio o de campo.
+  \item \textbf{Desarrollo (0--2):} análisis y diseño, planificación, calidad
+        del resultado, \textbf{estudio de viabilidad económica y legal},
+        documentos técnicos (código, resultados), uso de fuentes especializadas,
+        capacidad de análisis y síntesis, y \textbf{contexto socioeconómico y
+        sostenibilidad}.
+\end{itemize}
+
+Los aspectos de forma (portada, resúmenes, figuras, citas) son rápidos de
+corregir y suben nota; no los dejes para la última semana.
+
+\subsection{El depósito}
+
+Para depositar se envía, desde el correo de la UdL y con copia a la dirección,
+a la secretaría del campus (Igualada: \texttt{igualada.academic@udl.cat}; Lleida:
+\texttt{eps.tfg-tfm@udl.cat})~\cite{eps_terminis2025}:
+
+\begin{itemize}
+  \item la memoria en PDF con la portada oficial;
+  \item el resumen del TFG/TFM en PDF, con la plantilla oficial;
+  \item los anexos o el código, comprimidos o como enlace a la nube;
+  \item firmados digitalmente: el documento 2-1 (Biblioteca), el 2-2
+        (autorización para el repositorio RECERCAT) y el 2-3 (premios).
+\end{itemize}
+
+El nombre y los apellidos del estudiante van en el asunto del correo y en el
+nombre de cada fichero. Los envíos cuentan de lunes a las 9:00 a viernes a las
+14:00. En los grados, además, hay que tener acreditada la tercera lengua.
+
+% =====================================================================
+\section{Cómo trabajar con la plantilla}
+\label{sec:plantilla}
+
+\begin{enumerate}
+  \item Crea tu repositorio \textbf{privado} a partir de la plantilla en GitHub
+        (botón \emph{Use this template}) e impórtalo en Overleaf (\emph{New
+        Project $\rightarrow$ Import from GitHub}). Comparte el proyecto con la
+        dirección desde el primer día.
+  \item Rellena \texttt{config/datos.tex}: autor, título, dirección, idioma
+        (castellano, catalán o inglés) y estilo de cita. Todo lo demás sale de
+        ahí.
+  \item Descarga la portada oficial de la EPS, rellénala, expórtala a PDF y
+        guárdala como \texttt{portada/portada.pdf}.
+  \item Escribe un capítulo por fichero en \texttt{capitulos/}. Borra el texto
+        de ejemplo a medida que escribes el tuyo.
+  \item Para lo que tengas pendiente, usa \cmd{pending}\{\ldots\}: sale en rojo
+        mientras trabajas. La dirección te dejará notas con
+        \cmd{vitornote}\{\ldots\}.
+  \item Antes de entregar, cambia \texttt{mode=review} por \texttt{mode=final}
+        en \texttt{main.tex}. Desaparecen las notas, y si queda algún
+        \cmd{pending} o falta la portada oficial, la compilación falla: así no
+        se deposita nada provisional.
+\end{enumerate}
+
+Algunas herramientas de la plantilla que conviene usar desde el principio:
+\cmd{ac}\{API\} para las siglas (la primera vez se escribe completa),
+\cmd{fuente}\{\ldots\} bajo cada figura y tabla, \texttt{Figura\textasciitilde\cmd{ref}\{fig:x\}}
+para citar figuras y \cmd{cite}\{clave\} para las referencias. Nunca escribas a
+mano el número de una figura, una tabla o una referencia.
+
+% =====================================================================
+\section{Estructura de la memoria}
+\label{sec:estructura}
+
+\subsection{Parte preliminar}
+
+El orden es: portada oficial; Resumen (castellano), Resum (catalán) y Abstract
+(inglés), cada uno en su página, con el mismo contenido y con palabras clave;
+agradecimientos (opcional); declaración de uso de IA; índices de figuras, de
+tablas y de listados; lista de acrónimos, y por último el índice general, con
+dos niveles como máximo. Si una página se titula «Abstract», el texto está en
+inglés.
+
+El resumen no es una introducción: dice qué problema hay, qué has hecho, qué
+has obtenido (con cifras) y qué aporta. Quien lo lea debe conocer el resultado.
+
+\subsection{Capítulos}
+
+La Tabla~\ref{tab:capitulos} resume la función de cada capítulo de la plantilla.
+La estructura se puede adaptar al tipo de trabajo, pero cada capítulo tiene que
+tener una función clara, empezar con una frase que la explique y estar conectado
+con los objetivos. Si la introducción anuncia un capítulo, ese capítulo existe.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Función de cada capítulo de la memoria.}
+  \label{tab:capitulos}
+  \small
+  \begin{tabularx}{\textwidth}{@{}p{3.6cm}L@{}}
+    \toprule
+    \textbf{Capítulo} & \textbf{Qué debe contener} \\
+    \midrule
+    1. Introducción & Contexto, motivación (sin adelantar resultados), objetivos O1\ldots On medibles, alcance y estructura del documento. \\
+    2. Fundamentos y estado del arte & Los conceptos que necesita el lector, explicados y con un elemento visual, y una comparativa con criterios de las soluciones existentes (estudio de mercado en una app). Termina con el hueco que cubre tu trabajo. \\
+    3. Metodología, planificación y viabilidad & Metodología justificada, un único cronograma hasta la defensa, desviaciones, herramientas con versión, viabilidad económica y legal, y sostenibilidad. \\
+    4. Análisis y diseño & Requisitos RF/RNF con ID y verificables, arquitectura explicada y decisiones justificadas; en una app, prototipos y mapa de navegación. \\
+    5. Implementación & Estructura del código, componentes, fragmentos clave explicados, capturas reales, seguridad y gestión de errores. \\
+    6. Pruebas y resultados & Casos de prueba, resultados interpretados, tabla de trazabilidad, discusión y limitaciones. \\
+    7. Conclusiones y trabajo futuro & Cumplimiento objetivo a objetivo, conclusiones, limitaciones y $\sim$1 página de trabajo futuro. \\
+    Apéndices & Repositorio con la versión entregada, vídeo demo con QR (apps) y manual de instalación. \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+\subsection{Según el tipo de trabajo}
+
+\paragraph{Aplicaciones móviles o web.} Enseña la aplicación: estudio de mercado
+con las mismas fichas para todas las alternativas (con logo o captura y la fecha
+de consulta de los datos de la tienda), prototipos, mapa de navegación y
+capturas reales explicadas. Graba un \textbf{vídeo demo} en un dispositivo real,
+súbelo a YouTube (puede ser «no listado») e inclúyelo en la memoria con su
+enlace y un código QR. La memoria tiene que entenderse igualmente sin el vídeo.
+
+\paragraph{Sistemas, cloud y datos o aprendizaje automático.} Describe el
+entorno experimental de forma reproducible (hardware, versiones, configuración).
+Para cada dataset: estructura, número de muestras y particiones, tipo de dato
+con un ejemplo visual, referencia y protocolo de evaluación. Define las métricas
+con su fórmula, explica cada hiperparámetro y da los resultados en el punto de
+operación real, no el mejor caso.
+
+\paragraph{TFM.} Todo lo anterior, y además: una sección que diga sin rodeos qué
+aporta el trabajo frente al estado del arte, preguntas u objetivos de
+investigación, un estado del arte crítico con fuentes recientes, comparación con
+una referencia (\emph{baseline}) y rigor estadístico cuando se afirme que una
+diferencia es significativa.
+
+% =====================================================================
+\section{Redacción y estilo}
+\label{sec:redaccion}
+
+\begin{itemize}
+  \item \textbf{Una idea por frase.} Por encima de unas 40 palabras, divide.
+  \item \textbf{Prosa, no viñetas.} Las listas son para enumeraciones cortas y
+        siempre llevan una frase que las introduce. No hay listas de un solo
+        elemento.
+  \item \textbf{Todo apartado numerado lleva texto} antes de su primer
+        subapartado. Si no tienes nada que decir entre 4.5 y 4.5.1, no numeres.
+        No uses un cuarto nivel de títulos (4.5.1.1).
+  \item \textbf{Tiempos verbales coherentes.} Lo que ya has hecho, en pasado:
+        \antes{El desarrollo se llevará a cabo entre septiembre y febrero} $\rightarrow$
+        \despues{El desarrollo se llevó a cabo entre septiembre y julio}. El
+        futuro solo en el trabajo futuro (y el «deberá» de los requisitos).
+  \item \textbf{Negrita solo para etiquetas} de una lista o definición seguidas
+        de dos puntos, nunca para resaltar palabras en mitad de una frase. Para
+        un énfasis puntual, cursiva.
+  \item \textbf{Siglas y nombres propios definidos en su primera aparición}:
+        «Trabajo de Fin de Grado (TFG)». El nombre de tu aplicación se presenta
+        en la introducción, no en la conclusión.
+  \item \textbf{Explica los términos técnicos} la primera vez (\emph{batch size},
+        \emph{token}, latencia\ldots): tú los conoces, el tribunal quizá no.
+  \item \textbf{Sin absolutos ni sobreafirmaciones.} \antes{la única solución
+        viable} $\rightarrow$ \despues{una de las soluciones más adecuadas para
+        este caso}. Las hipótesis no son hechos: \antes{se confirma el
+        sobreajuste} $\rightarrow$ \despues{hay indicios de sobreajuste}.
+  \item \textbf{Un solo idioma.} Los rótulos de figuras y tablas, la interfaz que
+        describes y la bibliografía siguen el idioma del documento («Tabla 1», no
+        «Table 1»). Los términos en otro idioma, en cursiva.
+  \item \textbf{Pasa un corrector} (LanguageTool o el de tu editor) antes de cada
+        entrega, también sobre el texto de las imágenes.
+\end{itemize}
+
+% =====================================================================
+\section{Citas y bibliografía}
+\label{sec:citas}
+
+\subsection{Qué necesita una cita}
+
+Toda afirmación que no sea conocimiento común o resultado tuyo: datos
+estadísticos y de mercado, cifras de usuarios o descargas, afirmaciones de
+rendimiento («más rápido», «más escalable»), características de una tecnología,
+normativa, definiciones y comparativas. La cita va pegada a la afirmación que
+sostiene, no al final del párrafo.
+
+\begin{center}
+  \antes{Diversos estudios han demostrado que\ldots} $\rightarrow$
+  \despues{García y Ruiz~[2] mostraron que\ldots}
+\end{center}
+
+\subsection{Estilo}
+
+Usa \textbf{un único estilo} en todo el documento; recomiendo el numérico de
+IEEE (\texttt{[1]}), que es el que trae la plantilla. Si prefieres autor-año
+(APA), cámbialo en \texttt{config/datos.tex}, pero no mezcles: no vale citar
+con números y tener la bibliografía en formato autor-año, ni citar por el nombre
+de la revista en lugar del autor. Con biblatex, el formato de cada entrada sale
+solo; tu trabajo es que los datos de la entrada sean correctos.
+
+\subsection{Calidad de las fuentes}
+
+\begin{itemize}
+  \item Prefiere fuentes primarias u oficiales: artículos, libros, normas, RFC,
+        \emph{white papers} y la documentación oficial de cada herramienta.
+  \item Wikipedia, blogs, vídeos, foros o Pinterest no sirven como fuente
+        principal. Si citas un \emph{preprint} de arXiv que ya está publicado,
+        cita la versión publicada.
+  \item \textbf{Verifica cada entrada contra el original}: autores, título,
+        año, revista, DOI. Una referencia con la autoría equivocada o un
+        artículo «enviado» citado como publicado es un error grave.
+  \item La fecha de consulta solo se pone en las páginas web, y en el idioma
+        del documento («Consultado el\ldots», no «Accessed» en un texto en
+        castellano). Los datos que cambian (valoraciones de tienda, número de
+        descargas) siempre con su fecha.
+  \item Cada entrada de la bibliografía se cita en el texto y cada cita está en
+        la bibliografía. Con biblatex esto es automático si nunca escribes la
+        bibliografía a mano.
+  \item Como orientación, un TFG sólido suele tener entre 20 y 30 referencias de
+        calidad; con 8 o 9 el estado del arte se queda corto.
+  \item Cada librería, herramienta, método o dataset que uses lleva su
+        referencia y su versión exacta.
+\end{itemize}
+
+La biblioguía de la UdL~\cite{udl_biblioguia} explica cómo buscar fuentes y
+gestionar referencias con Zotero, que puede exportar directamente a
+\texttt{bibliografia.bib}.
+
+% =====================================================================
+\section{Figuras, tablas y código}
+\label{sec:figuras}
+
+\begin{regla}[Regla de oro de los elementos visuales]
+Todo elemento visual se cita en el texto, a ser posible antes de que aparezca, y
+el texto guía al lector por él: qué mirar, qué significa y qué se concluye. «Los
+resultados están en la Tabla 5» no basta.
+\end{regla}
+
+\begin{center}
+  \antes{Los resultados de las pruebas están en la Tabla 5.}\\[2pt]
+  $\downarrow$\\[2pt]
+  \despues{La Tabla 5 recoge las 12 pruebas de integración: 11 se superaron; la
+  de reenvío con pérdida de paquetes falló, lo que motivó el reintento descrito
+  en la Sección 7.2.}
+\end{center}
+
+\begin{itemize}
+  \item \textbf{Numeración automática} con \cmd{label} y \cmd{ref}: continua,
+        sin huecos y en orden de aparición. Una tabla es una tabla, no una
+        figura.
+  \item \textbf{Pie breve y descriptivo} (no «Figura 1» ni el nombre de la
+        pantalla sin más), centrado y sin doble puntuación. La explicación
+        larga va en el texto. Las tablas llevan el pie arriba; las figuras,
+        abajo.
+  \item \textbf{Fuente siempre}, con \cmd{fuente}: «Elaboración propia» o
+        «Adaptado de [n]». Una imagen ajena sin fuente es un problema de
+        integridad.
+  \item \textbf{Gráficas a ancho completo}, en formato vectorial (PDF) generado
+        con un script que guardas en el repositorio, con ejes etiquetados y
+        unidades.
+  \item \textbf{Capturas legibles}, agrupadas de dos en dos o de tres en tres
+        con \texttt{subfigure}, nunca estiradas ni borrosas. Ninguna figura
+        tapa el número de página.
+  \item \textbf{Revisa la ortografía dentro de las imágenes}: un «FEBERERO» en
+        un diagrama se ve igual que en el texto.
+  \item \textbf{Diagramas propios} de la arquitectura y del flujo de datos. Un
+        collage de logos de tecnologías no explica nada: conviértelo en una
+        tabla de herramientas con versión y motivo.
+  \item \textbf{Apoyo visual en la teoría}: cada concepto denso del estado del
+        arte gana con un esquema (por ejemplo, las capas de una red neuronal o
+        el intercambio de mensajes de un protocolo).
+  \item \textbf{Código solo cuando aporta}: fragmentos de 10 a 25 líneas,
+        explicados en el texto (qué problema resuelven, qué líneas importan). El
+        código completo va en el repositorio.
+\end{itemize}
+
+% =====================================================================
+\section{Pruebas, resultados y trazabilidad}
+\label{sec:pruebas}
+
+\begin{itemize}
+  \item \textbf{Evidencia, no intención.} Cada requisito tiene al menos un caso
+        de prueba con pasos o entrada, resultado esperado, resultado obtenido y
+        estado. Si dices que hay una cobertura del 90\,\% o 150 casos, enséñalo.
+  \item \textbf{Lo propuesto no es lo realizado.} Si una prueba con usuarios no
+        se ha podido hacer, se dice así y se lleva a trabajo futuro. Cada
+        funcionalidad tiene un único estado en todo el documento (hecha,
+        parcial o pendiente).
+  \item \textbf{Cifras coherentes} entre el resumen, el texto, las tablas y las
+        conclusiones. Revísalas todas antes de cada entrega.
+  \item \textbf{Pruebas con personas}: indica el número de participantes, su
+        perfil, el instrumento (por ejemplo, el cuestionario SUS) y los valores
+        absolutos junto a los porcentajes: \antes{el 54,5\,\% prefiere\ldots}
+        $\rightarrow$ \despues{el 54,5\,\% (6 de 11) prefiere\ldots}. Con datos
+        personales, y sobre todo de menores, explica el consentimiento, la
+        anonimización y el cumplimiento del RGPD.
+  \item \textbf{Trazabilidad}: una tabla que relacione cada objetivo con sus
+        requisitos, sus pruebas y el resultado. Es lo primero que mira el
+        tribunal para saber si has hecho lo que prometías.
+  \item \textbf{Conclusiones objetivo a objetivo}: cumplido, parcialmente
+        cumplido o no cumplido, con la evidencia. Las limitaciones van aparte
+        del trabajo futuro, que ocupa alrededor de una página.
+  \item \textbf{El título no promete más de lo entregado.} Si el alcance cambia,
+        se ajustan el título (antes del depósito), los objetivos y la
+        introducción.
+\end{itemize}
+
+% =====================================================================
+\section{Uso de la inteligencia artificial}
+\label{sec:ia}
+
+Las herramientas de IA generativa pueden ayudarte en tareas auxiliares, pero no
+sustituyen tu aportación personal, tu reflexión crítica ni tu criterio técnico.
+El TFG evalúa lo que sabes hacer tú. La Tabla~\ref{tab:ia} resume qué usos se
+admiten.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Usos de la IA generativa en el TFG/TFM.}
+  \label{tab:ia}
+  \small
+  \begin{tabularx}{\textwidth}{@{}p{4.6cm}p{3.2cm}L@{}}
+    \toprule
+    \textbf{Uso} & \textbf{¿Se admite?} & \textbf{Condiciones} \\
+    \midrule
+    Corrección lingüística y de formato & Sí, con declaración & Como apoyo limitado; el texto y las ideas son tuyos. \\
+    Generación o revisión de código & Sí, con declaración & Debes entender, probar y poder defender cada línea. \\
+    Búsqueda inicial de fuentes & Sí & Cada fuente se lee y se verifica en el original antes de citarla. \\
+    Diagramas y visualizaciones & Sí, con declaración & Indica la herramienta en la fuente de la figura. \\
+    Análisis, discusión y conclusiones & No & Son la parte que demuestra tu criterio: tienen que ser tuyas. \\
+    Redactar capítulos completos & No & Es contenido no original y afecta a la nota de redacción. \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+\begin{aviso}[Riesgos que veo con frecuencia]
+\begin{itemize}[leftmargin=1.2em]
+  \item \textbf{Referencias inventadas.} Los asistentes generan citas con
+        autores, títulos y DOI que no existen. Cada referencia se comprueba en
+        la fuente original; una referencia falsa es un problema de integridad.
+  \item \textbf{Texto genérico sin hilo}: viñetas por todas partes, apartados
+        numerados sin texto, frases de relleno («en el panorama actual\ldots»)
+        y afirmaciones sin fuente. Se nota, y baja la nota de redacción.
+  \item \textbf{Reestructuraciones masivas} propuestas por un asistente cuando el
+        documento ya está casi cerrado: consulta antes con la dirección, porque
+        pueden desestabilizar una memoria que funcionaba.
+  \item \textbf{Datos que no son tuyos.} No pegues en herramientas externas datos
+        personales, datos de terceros ni código o documentación confidencial de
+        una empresa.
+\end{itemize}
+\end{aviso}
+
+Todo uso se declara en la página «Declaración de uso de herramientas de IA» de
+la plantilla: qué herramienta (y versión), para qué tarea concreta, en qué partes
+y cómo revisaste el resultado. Si no has usado ninguna, también se dice. Tras
+usarlas, eres responsable de todo el contenido, incluidos sus errores.
+
+% =====================================================================
+\section{Integridad académica}
+\label{sec:integridad}
+
+\begin{itemize}
+  \item \textbf{No uses el TFG de otra persona como plantilla}, ni su portada,
+        ni su estructura de resultados. Las memorias se cotejan entre sí. En un
+        caso reciente, una memoria con dos terceras partes de frases idénticas
+        a otro TFG se consideró no defendible hasta que se reescribió por
+        completo. Para empezar, usa esta plantilla.
+  \item \textbf{Parafrasear no exime de citar.} Si la idea es de otra persona, se
+        cita aunque la escribas con tus palabras. Las citas literales van entre
+        comillas y con referencia.
+  \item \textbf{Deja claro qué has hecho tú.} Si partes de un proyecto previo, de
+        código de un grupo de investigación o de una empresa, distingue en el
+        texto tu aportación de la de los demás.
+  \item \textbf{El código ajeno} se usa respetando su licencia y se cita.
+\end{itemize}
+
+% =====================================================================
+\section{Listas de comprobación}
+\label{sec:checklists}
+
+\subsection{Antes del informe inicial}
+\begin{checklist}
+  \item Objetivos numerados y medibles.
+  \item Índice previsto con los capítulos de la plantilla adaptados a tu trabajo.
+  \item Tareas con su entregable y cronograma hasta el depósito y la defensa.
+  \item Fuentes que de verdad has leído, citadas con \cmd{cite}.
+\end{checklist}
+
+\subsection{Antes del informe de seguimiento}
+\begin{checklist}
+  \item Tabla de control: qué está hecho, qué está en curso y qué no ha empezado.
+  \item Desviaciones explicadas y cronograma actualizado.
+  \item Decisiones técnicas con las alternativas descartadas y el motivo.
+  \item Valoración crítica honesta del estado y de los riesgos.
+\end{checklist}
+
+\subsection{Antes del documento final y del depósito}
+\begin{checklist}
+  \item Portada oficial completa: título idéntico al de la propuesta, todos los
+        directores, mes (en catalán) y año.
+  \item Resumen, Resum y Abstract, cada uno en su página, con resultados y
+        palabras clave.
+  \item Declaración de uso de IA rellenada.
+  \item La estructura que anuncia la introducción coincide con el índice.
+  \item Cada objetivo se cierra en las conclusiones con su evidencia.
+  \item Tabla de trazabilidad completa; nada propuesto aparece como realizado.
+  \item Toda figura y tabla citada e interpretada, con pie y fuente; sin
+        huecos de numeración.
+  \item Un único estilo de cita; cada entrada verificada contra el original.
+  \item Cronograma en pasado que llega al depósito y la defensa.
+  \item Viabilidad económica y legal, y sostenibilidad.
+  \item Repositorio con la versión entregada (tag o commit); en una app, vídeo
+        demo con enlace y QR que funcionan.
+  \item Sin texto provisional: compila sin errores en \texttt{mode=final}, sin
+        referencias ni citas indefinidas (\texttt{??}).
+  \item Corrector pasado, también sobre el texto de las imágenes.
+  \item Ficheros con tu nombre y apellidos, y el resto de documentos del
+        depósito firmados.
+\end{checklist}
+
+% =====================================================================
+\section{Errores frecuentes, con ejemplos}
+\label{sec:errores}
+
+La Tabla~\ref{tab:errores} recoge correcciones reales, anonimizadas, de memorias
+que he revisado. Si te reconoces en alguna, corrígela antes de entregar.
+
+{\small
+\begin{longtable}{@{}p{3.0cm}p{5.8cm}p{5.8cm}@{}}
+  \caption{Errores frecuentes y cómo corregirlos.}\label{tab:errores}\\
+  \toprule
+  \textbf{Tema} & \textbf{Antes} & \textbf{Después} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{Tema} & \textbf{Antes} & \textbf{Después} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  Portada & «Mes: Elija un elemento.» o «Mes: July» & «Mes: Juliol», y todos los directores \\
+  Resúmenes & Páginas «Abstracte» y «Abstracto»; una página «Abstract» con el texto en castellano & «Resum», «Resumen» y «Abstract», cada una en su idioma \\
+  Objetivos & «Conseguir un rendimiento óptimo» & «O3. Latencia media $<$ 100 ms con 200 usuarios» \\
+  Estructura & La introducción anuncia un capítulo de pruebas que no existe & Crear el capítulo o quitarlo del anuncio \\
+  Cronograma & Plan de septiembre a febrero; el texto habla de 4 etapas y el Gantt tiene 6 & Un único plan de septiembre a julio, con depósito y defensa \\
+  Requisitos & «RNF-02: El sistema será escalable» & «RNF-02: soporta N usuarios con latencia $<$ X ms», o marcarlo como objetivo de diseño no medido \\
+  Normativa & «La aplicación cumple WCAG 2.1 AA» (sin medirlo) & «Se han seguido las pautas de WCAG 2.1 [n]», o aportar las medidas \\
+  Justificación & «Se eligió porque la usan grandes empresas» & «Se eligió porque resuelve el descubrimiento de nodos y el NAT» \\
+  Stack & Las tecnologías se describen en tres capítulos distintos & Una tabla «capa -- herramienta -- versión -- motivo» \\
+  Métricas & La métrica principal se explica solo con palabras & La fórmula, p.\,ej. $\mathrm{CER} = (S + D + I)/N$, y qué es cada término \\
+  Citas & «(Psicología: Teoría e Pesquisa, 2024)» & «Pereira [4]» o «(Pereira, 2024)», según el estilo elegido \\
+  Fuentes & Wikipedia, un vídeo o un foro como fuente de una definición & La documentación oficial, el RFC o el artículo original \\
+  Bibliografía & 52 de 66 entradas nunca se citan & Citar cada entrada o eliminarla \\
+  Fecha de consulta & «[Accessed 11 Oct. 2025]» en un texto en castellano & «Consultado el 11 de oct. de 2025» \\
+  Figuras & Pie sin mención en el texto & «Como muestra la Figura 3, \ldots» y dos o tres frases de lectura \\
+  Referencias & «en la 33» o «Error! Reference source not found» & «en la Figura 33», con referencias automáticas \\
+  Tabla o figura & «Figura 15» para una tabla; «Table 1» en un texto en castellano & «Tabla 3», con su índice de tablas \\
+  Pies & «Figura 7: :», «Table 6.20.:» & «Figura 7:», «Table 6.20:» \\
+  Imágenes & «FEBERERO», «JAUSTES FINALES» dentro de un diagrama & «FEBRERO», «AJUSTES FINALES» \\
+  Negrita & «una \textbf{motivación social y ética}, basada en\ldots» & «una motivación social y ética, basada en\ldots» \\
+  Siglas & «TFG» sin definir; el nombre de la app aparece por primera vez en las conclusiones & «Trabajo de Fin de Grado (TFG)»; la app se presenta en la introducción \\
+  Gramática & «que la imagen a cambiado», «se ha realizado las revisiones» & «que la imagen ha cambiado», «se han realizado las revisiones» \\
+  Pruebas & «Cobertura total, más de 150 casos» & El porcentaje real de cobertura y una tabla de casos con su estado \\
+  Validación & «Se realizaron pruebas con usuarias» (no se hicieron) & «La validación con usuarias no se ha podido realizar; se propone como trabajo futuro» \\
+  Resultados & «Una precisión cercana al 90\,\%» & «79,84\,\% (FAR 1\,\%, FRR 42\,\%) en el umbral desplegado» \\
+  Precisión técnica & «El JWT se genera mediante bcrypt» & «Las contraseñas se guardan con bcrypt; el JWT se firma con HS256» \\
+  Encuestas & «El 54,5\,\% prefiere\ldots» & «El 54,5\,\% (6 de 11) prefiere\ldots», con N, perfil e instrumento \\
+  Texto provisional & «QUEDA EL MAPA», «final URL is still to be defined» & El contenido definitivo, o \cmd{pending} mientras se trabaja \\
+  Trabajo futuro & Cuatro páginas, o dentro de un anexo & Alrededor de una página al final de las conclusiones \\
+\end{longtable}}
+
+% =====================================================================
+\section*{Recursos}
+\addcontentsline{toc}{section}{Recursos}
+
+\begin{itemize}
+  \item Web de la EPS: normativa, plazos, portada oficial y documentos del
+        depósito (\url{https://www.eps.udl.cat/}).
+  \item Biblioguía de TFG/TFM de la UdL~\cite{udl_biblioguia}.
+  \item Documentación de Overleaf: \url{https://www.overleaf.com/learn}.
+  \item Gestor de referencias Zotero: \url{https://www.zotero.org/}.
+  \item Corrector LanguageTool: \url{https://languagetool.org/}.
+\end{itemize}
+
+\printbibliography[heading=bibintoc,title={Referencias}]
+
+\end{document}

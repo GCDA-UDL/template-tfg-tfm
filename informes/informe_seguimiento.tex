@@ -1,0 +1,74 @@
+% !TEX program = pdflatex
+% =====================================================================
+%  INFORME DE SEGUIMIENTO (Portafoli, 10 % de la nota)
+%  Lo evalúa la dirección entre las semanas 10 y 12 del trabajo.
+%  Contenido exigido por el Portafoli de la EPS:
+%    evolución (tareas hechas y ajuste a la planificación) · evaluación
+%    crítica del estado · decisiones técnicas y de diseño · planificación
+%    de lo pendiente y control de lo realizado.
+%  Se valora: seguir el plan o justificar los cambios, la capacidad crítica,
+%  de aprendizaje y de organización, y el interés por la calidad.
+%  Compilar: en Overleaf, Menú > Documento principal > informes/informe_seguimiento.tex
+%            en local, bash tools/build.sh informes/informe_seguimiento
+%  Extensión orientativa: 4-6 páginas.
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+\input{config/datos}
+\input{config/preambulo}
+\usepackage[mode=review]{revnotes}
+\revauthor{vitor}{Director}{revTeal}
+\addbibresource{bibliografia.bib}
+\pagestyle{plain}   % informe corto: solo número de página
+
+\begin{document}
+\begin{center}
+  {\Large\bfseries Informe de seguimiento del \tfgsigla\par}\vspace{4pt}
+  {\large \tfgtitulo\par}\vspace{6pt}
+  \tfgautor{} · \tfgtitulacion\\
+  Dirección: \tfgdirector\ifx\tfgcodirector\empty\else{} y \tfgcodirector\fi{} · Curso \tfgcurso
+\end{center}
+
+\section{Evolución del trabajo}
+Indica qué tareas del plan inicial están terminadas, cuáles en curso y cuáles
+no han empezado. Usa una tabla de control como la Tabla~\ref{tab:control}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Control de tareas (ejemplo).}
+  \label{tab:control}
+  \small
+  \begin{tabularx}{\textwidth}{@{}LllL@{}}
+    \toprule
+    \textbf{Tarea} & \textbf{Previsto} & \textbf{Estado} & \textbf{Observaciones} \\
+    \midrule
+    Estado del arte      & Oct--Nov & Terminada  & --- \\
+    Requisitos           & Nov--Dic & Terminada  & Se añadió RF-04 tras la entrevista \\
+    Incremento 1         & Ene--Feb & En curso (60\,\%) & Retraso de 2 semanas \\
+    \bottomrule
+  \end{tabularx}
+  \fuente{Elaboración propia.}
+\end{table}
+
+\section{Evaluación crítica del estado}
+Valora con honestidad qué va bien, qué va mal y por qué. Qué riesgos ves para
+terminar a tiempo y cómo los vas a reducir.
+
+\section{Decisiones técnicas y de diseño}
+Explica las decisiones importantes que has tomado (arquitectura, tecnologías,
+cambios de alcance), las alternativas que descartaste y el motivo.
+
+\section{Planificación de lo pendiente}
+La Figura~\ref{fig:plan-seguimiento} muestra la planificación actualizada hasta
+el depósito y la defensa. Si has cambiado el plan, explica qué y por qué.
+% Consejo: en figuras/cronograma.tex añade [progress=60] a una barra para
+% mostrar su avance real (p. ej. \ganttbar[progress=60]{Incremento 1}{8}{10}).
+
+\begin{figure}[htbp]
+  \centering
+  \input{figuras/cronograma}
+  \caption{Planificación actualizada.}
+  \label{fig:plan-seguimiento}
+  \fuente{Elaboración propia.}
+\end{figure}
+
+\end{document}

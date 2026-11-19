@@ -1,0 +1,140 @@
+% =====================================================================
+%  PREÁMBULO COMÚN (memoria, informes y guía)
+%  Normalmente NO hace falta tocar este fichero: los datos van en
+%  config/datos.tex. Si añades paquetes, hazlo al final, en la zona
+%  marcada, y comprueba que el documento sigue compilando sin errores.
+%  Requiere: \idiomadocumento y \estilocitas (definidos en datos.tex).
+% =====================================================================
+
+% --- Codificación, fuentes y microtipografía --------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[babel=true]{microtype}
+
+% --- Idiomas: castellano, catalán e inglés; el principal sale de datos.tex
+%     es-tabla        -> «Tabla» en vez de «Cuadro»
+%     es-noshorthands -> evita conflictos de < > " con TikZ y tablas
+%     es-nodecimaldot -> 3.5 en fórmulas no se convierte en 3,5
+\edef\tfgbabelopts{english,catalan,spanish,main=\idiomadocumento}
+\expandafter\usepackage\expandafter[\tfgbabelopts,es-tabla,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+
+% --- Página: A4, márgenes, interlineado 1,15, párrafos sin línea en blanco
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=2.5cm,headheight=15pt]{geometry}
+\usepackage{setspace}
+\setstretch{1.15}
+\usepackage[skip=6pt plus 2pt]{parskip}   % separación entre párrafos sin dobles saltos
+\raggedbottom
+% Sin líneas viudas ni huérfanas
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% --- Colores, figuras, tablas y diagramas -----------------------------
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{graphicx}
+\graphicspath{{figuras/}}
+\usepackage{float}
+\usepackage[section]{placeins}            % las figuras no "huyen" a otra sección
+\usepackage{booktabs,tabularx,multirow,array,longtable}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}                      % \qty{100}{ms}, \num{12345}: cifras y unidades
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,shapes.geometric,babel}
+\usepackage{pgfgantt}
+\usepackage{qrcode}
+\usepackage{enumitem}
+\setlist{itemsep=2pt,topsep=4pt}
+
+% --- Pies de figura y tabla: centrados, breves; tablas con el pie ARRIBA
+\usepackage[font=small,labelfont=bf,labelsep=colon,justification=centering,
+            singlelinecheck=true]{caption}
+\captionsetup[table]{position=top,skip=6pt}
+\captionsetup[figure]{skip=6pt}
+\usepackage[list=true]{subcaption}
+
+% \fuente{...}: línea de fuente bajo la figura o la tabla (OBLIGATORIA).
+%   \fuente{Elaboración propia.}   \fuente{Adaptado de \cite{clave}.}
+\newcommand{\fuente}[1]{\par\vspace{3pt}{\centering\footnotesize\fuentename: #1\par}}
+
+% --- Código fuente --------------------------------------------------
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small, columns=fullflexible, keepspaces=true,
+  breaklines=true, breakatwhitespace=false, tabsize=2,
+  frame=tb, framesep=4pt, numbers=left, numberstyle=\tiny\color{gray}, numbersep=6pt,
+  keywordstyle=\color{RoyalBlue}\bfseries, commentstyle=\color{ForestGreen}\itshape,
+  stringstyle=\color{BrickRed}, showstringspaces=false, captionpos=b,
+  floatplacement=htbp,  % con [float] en cada listado, el código no se parte entre páginas
+  extendedchars=true,
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+           {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+           {à}{{\`a}}1 {è}{{\`e}}1 {ò}{{\`o}}1 {ï}{{\"i}}1 {ü}{{\"u}}1
+           {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {ç}{{\c c}}1 {Ç}{{\c C}}1 {·}{{$\cdot$}}1
+           {¿}{{?`}}1 {¡}{{!`}}1
+}
+
+% --- Acrónimos: \ac{TFG} -> 1.ª vez «Trabajo de Fin de Grado (TFG)», después «TFG»
+\usepackage[printonlyused]{acronym}
+
+% --- Bibliografía (biblatex + biber). Un ÚNICO estilo en todo el documento.
+\edef\tfgbibopts{backend=biber,style=\estilocitas}
+\expandafter\usepackage\expandafter[\tfgbibopts]{biblatex}
+\usepackage{xurl}                          % URLs largas que se parten bien
+% Fecha de consulta y URL en el idioma del documento (nunca «Accessed» en un
+% texto en castellano):  «Consultado el 15 de nov. de 2026. Disponible en: URL»
+\DefineBibliographyStrings{spanish}{urlseen={Consultado el}, url={Disponible en}}
+\DefineBibliographyStrings{catalan}{urlseen={Consultat el}, url={Disponible a}}
+
+% --- Textos que dependen del idioma --------------------------------------
+\addto\captionsspanish{%
+  \def\fuentename{Fuente}\def\acronimosname{Acrónimos}%
+  \def\lstlistingname{Listado}\def\lstlistlistingname{Índice de listados}%
+  \def\resumenname{Resumen}\def\clavesname{Palabras clave}%
+  \sisetup{output-decimal-marker={,}}}
+\addto\captionscatalan{%
+  \def\fuentename{Font}\def\acronimosname{Acrònims}%
+  \def\lstlistingname{Llistat}\def\lstlistlistingname{Índex de llistats}%
+  \def\resumenname{Resum}\def\clavesname{Paraules clau}%
+  \sisetup{output-decimal-marker={,}}}
+\addto\captionsenglish{%
+  \def\fuentename{Source}\def\acronimosname{Acronyms}%
+  \def\lstlistingname{Listing}\def\lstlistlistingname{List of Listings}%
+  \def\resumenname{Abstract}\def\clavesname{Keywords}%
+  \sisetup{output-decimal-marker={.}}}
+
+% --- Encabezados de capítulo y profundidad del índice ----------------
+\usepackage{titlesec}
+\ifdefined\chapter
+  \titleformat{\chapter}[display]
+    {\normalfont\bfseries\huge\raggedright\hyphenpenalty=10000}
+    {\large\chaptertitlename~\thechapter}{6pt}{\huge}
+    [\vspace{2pt}\titlerule]
+  \titlespacing*{\chapter}{0pt}{0pt}{20pt}
+\fi
+% Títulos sin palabras partidas por guiones
+\titleformat*{\section}{\normalfont\Large\bfseries\raggedright\hyphenpenalty=10000}
+\titleformat*{\subsection}{\normalfont\large\bfseries\raggedright\hyphenpenalty=10000}
+\setcounter{secnumdepth}{2}   % numera hasta X.Y.Z; no uses un 4.º nivel
+\setcounter{tocdepth}{1}      % el índice muestra capítulos y secciones (máx. 2 niveles)
+
+% --- Cabecera y pie: número de página centrado abajo ----------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% --- Enlaces y metadatos del PDF (hyperref casi al final) --------------
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,
+            urlcolor=MidnightBlue,bookmarksnumbered=true,pdfusetitle]{hyperref}
+\usepackage{bookmark}
+
+% --- Zona para tus paquetes y comandos propios -----------------------
+% \usepackage{...}

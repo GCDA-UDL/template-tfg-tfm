@@ -1,0 +1,23 @@
+% =====================================================================
+%  APÉNDICE B · MANUAL DE INSTALACIÓN Y USO
+%  Objetivo: que otra persona pueda ejecutar el proyecto. Lo ideal es un
+%  único comando (p. ej. docker compose) y los requisitos previos exactos.
+% =====================================================================
+\chapter{Manual de instalación}
+\label{ap:manual}
+
+Este apéndice explica cómo poner en marcha el sistema descrito en el
+Capítulo~\ref{cap:implementacion}. Solo se necesita Docker~\cite{doc_docker} y
+una copia del repositorio (Apéndice~\ref{ap:repositorio}). El
+Listado~\ref{lst:instalacion} muestra los comandos.
+
+\begin{lstlisting}[float, language=bash, caption={Puesta en marcha del servidor.},
+                   label={lst:instalacion}]
+git clone https://github.com/usuario/repositorio.git
+cd repositorio
+docker compose up -d          # base de datos + API en http://localhost:8000
+docker compose run --rm api pytest   # ejecuta todas las pruebas
+\end{lstlisting}
+
+La aplicación Android se instala desde el fichero \texttt{app-release.apk}
+publicado en la sección de \emph{releases} del repositorio.

@@ -1,0 +1,42 @@
+% =====================================================================
+%  CRONOGRAMA (diagrama de Gantt) · fuente ÚNICA de la planificación
+%  Se usa en la memoria (Cap. 3) y en los informes inicial y de seguimiento:
+%  así el plan es el mismo en todos los documentos.
+%  - Una columna = una quincena (granularidad uniforme; no la mezcles).
+%  - El plan llega SIEMPRE hasta el depósito y la defensa reales.
+%  - progress=NN (opcional) marca el avance de una tarea en el seguimiento.
+%  - Ajusta los meses y las fechas al calendario oficial del curso.
+% =====================================================================
+\begin{ganttchart}[
+    x unit=0.45cm, y unit chart=0.52cm, y unit title=0.55cm,
+    vgrid={*1{draw=black!10}}, hgrid,
+    title label font=\scriptsize\bfseries, title height=1,
+    bar label font=\footnotesize, group label font=\footnotesize\bfseries,
+    milestone label font=\footnotesize\itshape,
+    bar/.append style={fill=RoyalBlue!55, draw=RoyalBlue!80!black},
+    group/.append style={fill=black!70},
+    milestone/.append style={fill=BrickRed, draw=BrickRed},
+    progress label text={}, bar incomplete/.append style={fill=RoyalBlue!15},
+    bar height=0.55, group height=0.3, milestone height=0.55,
+  ]{1}{20}
+  \gantttitle{Oct}{2} \gantttitle{Nov}{2} \gantttitle{Dic}{2} \gantttitle{Ene}{2}
+  \gantttitle{Feb}{2} \gantttitle{Mar}{2} \gantttitle{Abr}{2} \gantttitle{May}{2}
+  \gantttitle{Jun}{2} \gantttitle{Jul}{2} \\
+  \ganttgroup{F1. Análisis}{1}{6} \\
+  \ganttbar{Propuesta y estado del arte}{1}{4} \\
+  \ganttbar{Requisitos}{4}{6} \\
+  \ganttgroup{F2. Diseño e implementación}{6}{15} \\
+  \ganttbar{Diseño de la arquitectura}{6}{7} \\
+  \ganttbar{Incremento 1: reservas}{8}{10} \\
+  \ganttbar{Incremento 2: tiempo real}{11}{13} \\
+  \ganttbar{Incremento 3: notificaciones}{14}{15} \\
+  \ganttgroup{F3. Validación y cierre}{14}{20} \\
+  \ganttbar{Pruebas y validación}{14}{17} \\
+  \ganttbar{Redacción de la memoria}{3}{18} \\
+  \ganttgroup{Hitos de evaluación}{3}{20} \\
+  \ganttmilestone{Informe inicial (sem. 4-6)}{3} \\
+  \ganttmilestone{Informe de seguimiento (sem. 10-12)}{6} \\
+  \ganttmilestone{Documento final ($\geq$3 sem. antes)}{17} \\
+  \ganttmilestone{Depósito ($\geq$5 días hábiles antes)}{19} \\
+  \ganttmilestone{Defensa}{20}
+\end{ganttchart}
