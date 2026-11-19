@@ -12,10 +12,13 @@ Todo el contenido de ejemplo (la aplicación *SalaLibre*, los datos y las refere
 
 ## Empezar
 
-1. En GitHub, pulsa **Use this template → Create a new repository**. Créalo **privado**, con un nombre como `thesis-<tema>` (por ejemplo, `thesis-reserva-salas`).
-2. En Overleaf: **New Project → Import from GitHub** y elige tu repositorio. También puedes descargar el ZIP y usar **New Project → Upload Project**.
-3. Comparte el proyecto de Overleaf con tu director o directora.
-4. Comprueba en **Menu** que el compilador es **pdfLaTeX** y el documento principal es **`main.tex`**.
+**Estudiantes:** tu director o directora te comparte en Overleaf un proyecto ya creado a partir de esta plantilla. Acepta la invitación, trabaja siempre en ese proyecto y sigue los [primeros pasos](#primeros-pasos).
+
+**Dirección (una vez):** en Overleaf, **New Project → Import from GitHub** y elige `GCDA-UDL/template-tfg-tfm` (sin integración con GitHub: **Code → Download ZIP** aquí y **New Project → Upload Project** en Overleaf). Ese proyecto es la plantilla maestra: no se edita.
+
+**Dirección (por estudiante):** en la lista de proyectos de Overleaf, **Copy** sobre la plantilla maestra, con un nombre como «TFG - Apellidos, Nombre - 2026-27». Después, **Share** con el correo UdL del estudiante y permiso de edición. La copia no queda conectada a GitHub.
+
+En los dos casos, comprueba en **Menu** que el compilador es **pdfLaTeX** y el documento principal es **`main.tex`**.
 
 ## Primeros pasos
 
